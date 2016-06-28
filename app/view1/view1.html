@@ -4,6 +4,12 @@
 <div>{{ obj.date }}</div>
 <div>{{ obj.number }}</div>
 
+<div>Data from ctrl3 : {{dataFromCtrl3}}</div>
+
 <ul>
-	<li ng-repeat="name in obj.names">{{name}}</li>
+    <li ng-repeat="name in obj.names">{{name}}</li>
 </ul>
+
+<pre>{{data1 | json}}</pre>
+<pre>{{data2 | json}}</pre>
+<pre>{{data3 | json}}</pre>
