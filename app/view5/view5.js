@@ -12,6 +12,7 @@ angular.module('myApp.view5', ['ngRoute'])
         });
     }])
 
-    .controller('View5Ctrl', [function() {
-
+    .controller('View5Ctrl', ['$scope', function($scope){
+        $scope.puikus= 'Mano puikusis view5'
+        $scope.klausimas = 'Ar jums patinka mano view5?'
     }]);

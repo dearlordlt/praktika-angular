@@ -1,4 +1,4 @@
-<h1>Mano puikusis view5</h1>
+<h1>{{puikus}}</h1>
 
 <script>
     angular.module('checkboxExample', [])
@@ -10,7 +10,7 @@
             }]);
 </script>
 
-<p> Ar jums patinka mano view5?</p>
+<p> {{klausimas}}</p>
 
 <form name="myForm" ng-controller="ExampleController">
     <label>TAIP!:
@@ -20,3 +20,4 @@
         <input type="checkbox" ng-model="checkboxModel.NE"
                ng-true-value="'YES'" ng-false-value="'NO'">
   </form>
+
