@@ -1,23 +1,11 @@
-<h1>{{puikus}}</h1>
+<h1>{{font.puikus}}</h1>
 
-<script>
-    angular.module('checkboxExample', [])
-            .controller('ExampleController', ['$scope', function($scope) {
-                $scope.checkboxModel = {
-                    value1 : true,
-                    value2 : 'YES'
-                };
-            }]);
-</script>
+<p> font.klausimas </p>
+<label>TAIP!: <input type="checkbox" ng-model="master"></label><br/>
+<label >NE: <input type="checkbox" ng-model="master" ></label><br/>
 
-<p> {{klausimas}}</p>
+<div> {{font.klausimas2}}</div>
 
-<form name="myForm" ng-controller="ExampleController">
-    <label>TAIP!:
-        <input type="checkbox" ng-model="checkboxModel.TAIP!">
-    </label><br/>
-    <label>NE:
-        <input type="checkbox" ng-model="checkboxModel.NE"
-               ng-true-value="'YES'" ng-false-value="'NO'">
-  </form>
-
+<ul>
+    <li ng-repeat="listas in font.listas">{{listas}}</li>
+</ul>
