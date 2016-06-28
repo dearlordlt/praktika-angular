@@ -1,0 +1,22 @@
+<h1>Mano puikusis view5</h1>
+
+<script>
+    angular.module('checkboxExample', [])
+            .controller('ExampleController', ['$scope', function($scope) {
+                $scope.checkboxModel = {
+                    value1 : true,
+                    value2 : 'YES'
+                };
+            }]);
+</script>
+
+<p> Ar jums patinka mano view5?</p>
+
+<form name="myForm" ng-controller="ExampleController">
+    <label>TAIP!:
+        <input type="checkbox" ng-model="checkboxModel.TAIP!">
+    </label><br/>
+    <label>NE:
+        <input type="checkbox" ng-model="checkboxModel.NE"
+               ng-true-value="'YES'" ng-false-value="'NO'">
+  </form>
