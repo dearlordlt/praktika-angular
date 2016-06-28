@@ -16,7 +16,7 @@ angular.module('myApp.view5', ['ngRoute'])
         $scope.font =
         {
             puikus: 'Mano puikusis view5',
-            klausimas: 'Ar jums patinka mano view5',
+            klausimas: 'Ar jums patinka mano view5?',
             klausimas2: 'Ar reikia ka nors pakeisti?',
             listas: ['taip','ne', 'sueis']
         }

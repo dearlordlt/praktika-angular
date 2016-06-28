@@ -2,10 +2,20 @@
 
 <p> {{font.klausimas}} </p>
 <label>TAIP!: <input type="checkbox" ng-model="master"></label><br/>
-<label >NE: <input type="checkbox" ng-model="master" ></label><br/>
+<div class="check-element animate-hide" ng-show="master">
+        <span class="glyphicon glyphicon-thumbs-up"></span> Thank you!
+</div>
+
+
+<label >NE: <input type="checkbox" ng-model="checked" ></label><br/>
+
+    <div class="check-element animate-hide" ng-show="checked">
+        <span class="glyphicon glyphicon-thumbs-down"></span> But... but.. how dare you...
+    </div>
 
 <div> {{font.klausimas2}}</div>
 
 <ul>
     <li ng-repeat="listas in font.listas">{{listas}}</li>
 </ul>
+
