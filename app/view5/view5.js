@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','manoService', function ($scope, manoService ) {
+angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','manoService', '$http', function ($scope, manoService, $http ) {
     $scope.font = {
         puikus: 'Mano puikusis view5',
         klausimas: 'Ar jums patinka mano view5?',
@@ -18,6 +18,11 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
         $scope.myScore = manoService.kintamasis;
     };
 
+    $scope.veikla= false;
+
+    $http.get('http://localhost:8000/db/jurates.db.json').success(function (response) {
+        $scope.veikla = response;
+    });
 
 }]);
 
