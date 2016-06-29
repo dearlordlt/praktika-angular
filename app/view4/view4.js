@@ -17,7 +17,7 @@ angular.module('myApp.view4', ['ngRoute'])
 		$scope.cookieAmount += 1;
 		return $scope.cookieAmount;
 	};
-	
+	//~~~~~~~~~~~~~~~~~~~~~self adding cookies~~~~~~~~~~~~~~~~~~~
 	$scope.cookieAdder = function()
 	{
 		add = $interval(function()
@@ -25,13 +25,21 @@ angular.module('myApp.view4', ['ngRoute'])
 			$scope.cookieAmount += 1;
 			return $scope.cookieAmount;
 		}
-		
-		
 		,1000);
 		
-		
 	};
+	$scope.cookieAdder100 = function()
+	{
+		add = $interval(function()
+		{
+			$scope.cookieAmount +=100;
+			return $scope.cookieAmount;
+		},1000)
+	};
+	
+	//~~~~~~~~~~~~~~~~Condition checkers---------------------
 	$scope.condition1=false;
+	$scope.condition2=false;
 	$scope.condition = function()
 	{
 	if ($scope.cookieAmount>5)
@@ -39,6 +47,14 @@ angular.module('myApp.view4', ['ngRoute'])
 		$scope.condition1 = true;
 		return $scope.condition1;
 	}
+	};
+	$scope.condition100 = function()
+	{
+		if($scope.cookieAmount>30)
+		{
+			$scope.condition2=true;
+			return $scope.condition2;
+		}
 	};
 	
 	}]);
