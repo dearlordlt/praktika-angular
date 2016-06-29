@@ -1,6 +1,6 @@
 <h1>{{font.puikus}}</h1>
 
-----------------------------------------checkbox-------------------------------------------
+<!----------------------------------------checkbox------------------------------------------->
 <p> {{font.klausimas}} </p>
 <label>TAIP!: <input type="checkbox" ng-model="master"></label><br/>
 <div class="check-element animate-hide" ng-show="master">
@@ -14,26 +14,35 @@
         <span class="glyphicon glyphicon-thumbs-down"></span> But... but.. how dare you...
     </div>
 
-------------------------------------listas------------------------------------------
+<!------------------------------------listas------------------------------------------>
 <div> {{font.klausimas2}}</div>
 
 <ul>
     <li ng-repeat="listas in font.listas">{{listas}}</li>
 </ul>
 
-------------------------------------ivedamas vardas----------------------------------------
+<!------------------------------------ivedamas vardas---------------------------------------->
 <div >
     <label> <input type="text" ng-model="font.vardas"></label><br>
     Hello <span ng-bind="font.vardas"></span>!
 </div>
 
-------------------------------------service practice---------------------------------------
+<!------------------------------------service practice--------------------------------------->
 <div class="form-group">
-    <input type="text" class="form-control" placeholder="Score me please" ng-model="score">
+    <input type="text" class="form-control" placeholder="write something please" ng-model="score">
     <button ng-click="addKintamasis()">send</button>
 </div>
 
-------------------------------------directives practice-------------------------------------
+<!------------------------------------directives practice------------------------------------->
 <p> {{myScore | json}}</p>
 
 <jurates-directive></jurates-directive>
+
+<div class="form-group">
+    <input type="text" class="form-control" placeholder="Insert number" ng-model="number">
+    <button ng-click="nereikalingaFunkcija()">BEGIN!</button>
+    <movie-directive movie-number="number" reading-movie="nereikalingaFunkcija"></movie-directive>
+    <div>{{number}}</div>
+
+</div>
+

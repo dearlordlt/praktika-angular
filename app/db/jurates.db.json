@@ -1,7 +1,6 @@
 {
   "uzsiemimas" : [
-    {"valgyt": "valgyti"},
-    {"zaisti": "zaisti"},
-    {"bendrauti": "bendrauti"}
+    {"megstamas": "miegoti"},
+    {"nemegstamas": "dirbti"}
   ]
 }

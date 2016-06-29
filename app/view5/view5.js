@@ -16,6 +16,7 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
     $scope.addKintamasis = function() {
         manoService.kintamasis = $scope.score;
         $scope.myScore = manoService.kintamasis;
+
     };
 
   //  $scope.veikla= false;
@@ -24,5 +25,14 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
    //    $scope.veikla = response;
    // });
 
+   // $scope.number = movieService.numberOfMovie;
+   // $scope.addMovieNumber = function() {
+    //movieService.numberOfMovie = $scope.number;
+      //  console.log(movieService.numberOfMovie);
+   // };
+
+    $scope.nereikalingaFunkcija = function(){
+
+    };
 }]);
 
