@@ -1,12 +1,17 @@
 'use strict';
 
-angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$interval', function ($scope, $interval) {
+angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$interval','Highscore' , function ($scope, $interval, Highscore) {
     $scope.randomThing = "This will be a cookie clicker game";
+
+   //~~~~~~~~~~~~~~~~~~~~~~~~variable init~~~~~~~~~~~~~~~~~~~~~~~~~~~
     $scope.cookieAmount = 0;
     $scope.priceInc = 5;
-
+    $scope.highScore = Highscore.obj.highscore;
+    
     var add = null;
-
+    var add2 = null;
+    var add1 = null;
+    //~~~~~~~~~~~~~~~~~~~~~~simple cookie adding~~~~~~~~~~~~~~~~~~~~~
     $scope.cookieIncrement = function () {
         $scope.cookieAmount += 1;
         return $scope.cookieAmount;
@@ -24,7 +29,7 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
 
     };
     $scope.cookieAdder100 = function () {
-        add = $interval(function () {
+        add2 = $interval(function () {
             $scope.cookieAmount += 100;
             return $scope.cookieAmount;
         }, 1000)
@@ -49,13 +54,14 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
         }
     };
 
+
+    $scope.scoreChecker = function() {
+        add1 = $interval(function () {
+            if ($scope.cookieAmount > Highscore.obj.highscore) {
+                Highscore.obj.highscore = $scope.cookieAmount;
+                $scope.highScore = Highscore.obj.highscore;
+            }
+        }, 1000)
+    };
 }]);
 
-/*$scope.timer =setInterval($scope.cookieAdder(), 1000);
- $scope.cookieAdder = function()
- {
- $scope.cookieAmount += 1;
- };
-
- $scope.a = "yes";
- }]);*/
