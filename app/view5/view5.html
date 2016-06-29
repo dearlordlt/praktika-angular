@@ -1,5 +1,6 @@
 <h1>{{font.puikus}}</h1>
 
+----------------------------------------checkbox-------------------------------------------
 <p> {{font.klausimas}} </p>
 <label>TAIP!: <input type="checkbox" ng-model="master"></label><br/>
 <div class="check-element animate-hide" ng-show="master">
@@ -13,24 +14,26 @@
         <span class="glyphicon glyphicon-thumbs-down"></span> But... but.. how dare you...
     </div>
 
+------------------------------------listas------------------------------------------
 <div> {{font.klausimas2}}</div>
 
 <ul>
     <li ng-repeat="listas in font.listas">{{listas}}</li>
 </ul>
 
-
+------------------------------------ivedamas vardas----------------------------------------
 <div >
     <label> <input type="text" ng-model="font.vardas"></label><br>
     Hello <span ng-bind="font.vardas"></span>!
 </div>
 
-
+------------------------------------service practice---------------------------------------
 <div class="form-group">
     <input type="text" class="form-control" placeholder="Score me please" ng-model="score">
     <button ng-click="addKintamasis()">send</button>
 </div>
 
+------------------------------------directives practice-------------------------------------
 <p> {{myScore | json}}</p>
 
 <jurates-directive></jurates-directive>
