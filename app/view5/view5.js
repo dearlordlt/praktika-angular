@@ -18,11 +18,11 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
         $scope.myScore = manoService.kintamasis;
     };
 
-    $scope.veikla= false;
+  //  $scope.veikla= false;
 
-    $http.get('http://localhost:8000/db/jurates.db.json').success(function (response) {
-        $scope.veikla = response;
-    });
+  //  $http.get('http://localhost:8000/db/jurates.db.json').success(function (response) {
+   //    $scope.veikla = response;
+   // });
 
 }]);
 
