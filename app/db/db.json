@@ -1,0 +1,9 @@
+{
+  "users" : [
+    {"name" : "Jonas", "email": "jonas@jonas.lt"},
+    {"name" : "Petras", "email": "petras@jonas.lt"},
+    {"name" : "Ona", "email": "ona@jonas.lt", "roles" : ["admin", "superadmin"]},
+    {"name" : "Kęstas", "email": "kestas@jonas.lt"},
+    {"name" : "Marytė", "email": "maryte@jonas.lt"}
+  ]
+}
