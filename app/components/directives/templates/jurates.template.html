@@ -1,2 +1,6 @@
-<pre ng-if="veikla">{{veikla | json}}</pre>
-<pre ng-if="!veikla">Loading ...</pre>
+
+
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="uzsiemimas in veikla.uzsiemimas">{{uzsiemimas}}</li>
+
+</ul>

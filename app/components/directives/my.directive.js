@@ -11,6 +11,7 @@ angular.module('myApp').directive('moviesDirective', function() {
             $http.get('http://www.omdbapi.com/?t='+$scope.movieName+'&y=&plot=short&r=json').success(function(resp) {
                 console.log(resp);
                 $scope.movieData = resp;
+
             });
         }
     };
