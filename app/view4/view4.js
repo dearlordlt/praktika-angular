@@ -11,4 +11,10 @@ angular.module('myApp.view4', ['ngRoute'])
 
 .controller('View4Ctrl', ['$scope', function($scope) {
 	$scope.randomThing = "This will be a cookie clicker game"
+	$scope.cookieAmount = 0;
+	$scope.cookieIncrement = function()
+	{
+		$scope.cookieAmount =+ 1;
+		return $scope.cookieAmount;
+	};
 	}]);
