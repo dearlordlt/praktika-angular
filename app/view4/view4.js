@@ -12,6 +12,7 @@ angular.module('myApp.view4', ['ngRoute'])
 .controller('View4Ctrl', ['$scope','$interval',function($scope,$interval) {
 	$scope.randomThing = "This will be a cookie clicker game"
 	$scope.cookieAmount = 0;
+	$scope.priceInc=5;
 	$scope.cookieIncrement = function()
 	{
 		$scope.cookieAmount += 1;
@@ -20,6 +21,9 @@ angular.module('myApp.view4', ['ngRoute'])
 	//~~~~~~~~~~~~~~~~~~~~~self adding cookies~~~~~~~~~~~~~~~~~~~
 	$scope.cookieAdder = function()
 	{
+		$scope.cookieAmount = $scope.cookieAmount - $scope.priceInc;
+		$scope.priceInc++;
+		
 		add = $interval(function()
 		{
 			$scope.cookieAmount += 1;
@@ -40,13 +44,16 @@ angular.module('myApp.view4', ['ngRoute'])
 	//~~~~~~~~~~~~~~~~Condition checkers---------------------
 	$scope.condition1=false;
 	$scope.condition2=false;
+
 	$scope.condition = function()
 	{
+		
 	if ($scope.cookieAmount>5)
 	{
 		$scope.condition1 = true;
 		return $scope.condition1;
 	}
+	
 	};
 	$scope.condition100 = function()
 	{
