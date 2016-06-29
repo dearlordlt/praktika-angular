@@ -18,14 +18,23 @@ angular.module('myApp.view4', ['ngRoute'])
 		return $scope.cookieAmount;
 	};
 	
-	$scope.cookieAdder = function($interval)
+	$scope.cookieAdder = function()
 	{
+		add = $interval(function()
+		{
+			$scope.cookieAmount += 1;
+			return $scope.cookieAmount;
+		}
+		
+		
+		,1000);
+		/*
 		$scope.cookieAdder1()
 		{
 			$scope.cookieAmount += 1;
 		}
-		$interval(cookieAdder1, 1000);
-		return $scope.cookieAmount;
+		$interval(cookieAdder1(), 1000);
+		return $scope.cookieAmount;*/
 		
 	};
 	}]);
