@@ -1,43 +1,32 @@
 'use strict';
 
-angular.module('myApp').directive('testDirective', function() {
-    return{
+angular.module('myApp').directive('testDirective', function () {
+    return {
         templateUrl: 'components/directives/templates/test.directive.1.tmpl.html',
         scope: {
-            id : '=id',
-            jsonGet : '=jsonGet',
-            characters : '=characters'
+            id: '=?id',
+            jsonGet: '=?jsonGet'
         },
-        controller: function($scope, $http) {
-            $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
-                console.log(responce);
-                $scope.starwarsData = responce;
-            });
-            $scope.jsonGet = function(){
-                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
-                    console.log(responce);
+        controller: function ($scope, $http) {
+
+            $scope.jsonGet = function () {
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
                     $scope.starwarsData = responce;
+                    $scope.characters();
                 });
-                $scope.characters = function () {
-                    $scope.i = 0;
-                    for (i = 0; i < $scope.starwarsData.characters.length; i++) {
-                        $scope.starwarsData1 = 'loading';
-                        $http.get(' http://swapi.co/api/people/' + $scope.i + '/').success(function (responce) {
-                            console.log(responce);
-                            $scope.starwarsData1 = responce;
-                        });
-                    }
-                };
+            };
 
-                   
+            $scope.jsonGet();
 
-            }
-
-
-            
+            $scope.characters = function () {
+                for (var i = 1; i < $scope.starwarsData.characters.length - 1; i++) {
+                    $scope.starwarsData1 = 'loading';
+                    $http.get(' http://swapi.co/api/people/' + i + '/').success(function (responce) {
+                        console.log(responce);
+                        $scope.starwarsData1 = responce;
+                    });
+                }
+            };
         }
-
-
-
     }
 });

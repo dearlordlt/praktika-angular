@@ -8,38 +8,36 @@
 </span>
 
 <div ng-show="condition()">
-	<button ng-click="cookieAdder()">
+    <button ng-click="cookieAdder()">
 	<span class="glyphicon glyphicon-asterisk" aria-hidden="true">Bake 1 cookie per sec
 	<p>Cost: {{priceInc}}</p>
 	</span>
-	</button>
-	
+    </button>
+
 </div>
 <div ng-show="condition100()">
-	<button ng-click="cookieAdder100()">
+    <button ng-click="cookieAdder100()">
 	<span class="glyphicon glyphicon-asterisk" aria-hidden="true">Bake 100 cookies per sec
 	</span>
-	</button>
+    </button>
 </div>
 
 <div>
-	<button ng-click="scoreChecker()">
+    <button ng-click="scoreChecker()">
 		<span class="glyphicon glyphicon-asterisk" aria-hidden="true">check highscore
 	</span>
-	</button>
+    </button>
 </div>
 
 <p>{{highScore}}</p>
 
-<input type="text" class="form-control" ng-model="movieID" />
+<input type="text" class="form-control" ng-model="movieID"/>
 
 <button ng-click="updateMovies()">update</button>
 
-<test-directive  id="movieID" json-get="updateMovies"></test-directive>
-<test-directive  characters="updateMovies"></test-directive>
+<test-directive id="movieID || 1" json-get="updateMovies"></test-directive>
 
-
-<input type="text" class="form-control" ng-model="userName" />
+<input type="text" class="form-control" ng-model="userName"/>
 <button ng-click="addUserToService()">add user</button>
 <pre>{{userName | json}}</pre>
 

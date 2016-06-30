@@ -1,24 +1,12 @@
 <p>This is the partial for view 1. Hello world</p>
-<h1>{{ test }}</h1>
-
-<div>{{ obj.date }}</div>
-<div>{{ obj.number }}</div>
-
-<div>Data from ctrl3 : {{dataFromCtrl3}}</div>
-
-<ul>
-    <li ng-repeat="name in obj.names">{{name}}</li>
-</ul>
-
-<movies-directive movie-name="userList.users.length"></movies-directive>
 
 <hr />
 
-<pre ng-if="userList">{{userList | json}}</pre>
-<pre ng-if="!userList">Loading ...</pre>
+<div ng-if="userList">
+    <input type="text" class="form-control" placeholder="filter users" ng-model="myFilter" />
+    <ul>
+        <li ng-repeat="user in userList.users | filter:{name : myFilter} | orderBy:'cash'">Name: {{user.name}} Email: <a href="mailto:{{user.email}}">{{user.email}}</a> Cash {{user.cash | cashFilter}}</li>
+    </ul>
+</div>
 
-<hr />
-
-<pre>{{data1 | json}}</pre>
-<pre>{{data2 | json}}</pre>
-<pre>{{data3 | json}}</pre>
+<div ng-if="!userList">Loading ...</div>

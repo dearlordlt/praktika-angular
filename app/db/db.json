@@ -1,9 +1,29 @@
 {
-  "users" : [
-    {"name" : "Jonas", "email": "jonas@jonas.lt"},
-    {"name" : "Petras", "email": "petras@jonas.lt"},
-    {"name" : "Ona", "email": "ona@jonas.lt", "roles" : ["admin", "superadmin"]},
-    {"name" : "Kęstas", "email": "kestas@jonas.lt"},
-    {"name" : "Marytė", "email": "maryte@jonas.lt"}
+  "users": [
+    {
+      "name": "Jonas",
+      "email": "jonas@jonas.lt",
+      "cash": 500
+    },
+    {
+      "name": "Petras",
+      "email": "petras@jonas.lt",
+      "cash": 654
+    },
+    {
+      "name": "Ona",
+      "email": "ona@jonas.lt",
+      "cash": 14
+    },
+    {
+      "name": "Kęstas",
+      "email": "kestas@jonas.lt",
+      "cash": 561565
+    },
+    {
+      "name": "Marytė",
+      "email": "maryte@jonas.lt",
+      "cash": 0
+    }
   ]
 }
