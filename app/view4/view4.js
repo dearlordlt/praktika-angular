@@ -8,7 +8,6 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
     $scope.priceInc = 5;
     $scope.highScore = Highscore.obj.highscore;
     $scope.userName = Highscore.obj.name;
-    $scope.movieID= moviesearch.movie.movieData;
     var add = null;
     var add2 = null;
     var add1 = null;

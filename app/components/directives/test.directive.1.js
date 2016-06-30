@@ -7,19 +7,29 @@ angular.module('myApp').directive('testDirective', function() {
             id : '=id',
             jsonGet : '=jsonGet'
         },
-        controller: function($scope, $http, moviesearch) {
-            $scope.starwarsData = 'loading';
+        controller: function($scope, $http) {
             $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
                 console.log(responce);
                 $scope.starwarsData = responce;
             });
             $scope.jsonGet = function(){
-                $scope.starwarsData = 'loading';
                 $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
                     console.log(responce);
                     $scope.starwarsData = responce;
                 });
-            };
+                for (var i=0; i<$scope.starwarsData.charecters.length;i++) {
+                    $scope.starwarsData1 = 'loading';
+                    $http.get(' http://swapi.co/api/people/' + 1 + '/').success(function (responce) {
+                        console.log(responce);
+                        $scope.starwarsData1 = responce;
+                    });
+                }
+
+                   
+
+            }
+
+
             
         }
 
