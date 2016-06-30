@@ -5,7 +5,9 @@
 <div ng-if="userList">
     <input type="text" class="form-control" placeholder="filter users" ng-model="myFilter" />
     <ul>
-        <li ng-repeat="user in userList.users | filter:{name : myFilter} | orderBy:'cash'">Name: {{user.name}} Email: <a href="mailto:{{user.email}}">{{user.email}}</a> Cash {{user.cash | cashFilter}}</li>
+        <li ng-repeat="user in userList.users | filter:{name : myFilter} | orderBy:'cash' | indexFilter:'Yo'">
+            {{user.index}} Name: {{user.name | toUpperCase}} Email: <a href="mailto:{{user.email}}">{{user.email}}</a> Cash {{user.cash | cashFilter}}
+        </li>
     </ul>
 </div>
 

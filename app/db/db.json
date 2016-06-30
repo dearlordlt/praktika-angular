@@ -6,7 +6,10 @@
       "cash": 500
     },
     {
-      "name": "Petras",
+      "name": {
+        "first": "petras",
+        "last": "petraitis"
+      },
       "email": "petras@jonas.lt",
       "cash": 654
     },

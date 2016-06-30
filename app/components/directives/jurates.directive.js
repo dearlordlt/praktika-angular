@@ -11,7 +11,7 @@ angular.module('myApp').directive('juratesDirective', function () {
 
             $scope.veikla = false;
             console.log(typeof $scope.veikla);
-            $http.get('http://localhost:8000/db/jurates.db.json').success(function (response) {
+            $http.get('http://localhost:8080/db/jurates.db.json').success(function (response) {
             console.log(response.uzsiemimas[0]);
             $scope.veikla =  response;
 
