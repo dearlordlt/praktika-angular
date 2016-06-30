@@ -7,6 +7,7 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
     $scope.cookieAmount = 0;
     $scope.priceInc = 5;
     $scope.highScore = Highscore.obj.highscore;
+    $scope.userName = Highscore.obj.name;
     
     var add = null;
     var add2 = null;
@@ -61,7 +62,10 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
                 Highscore.obj.highscore = $scope.cookieAmount;
                 $scope.highScore = Highscore.obj.highscore;
             }
-        }, 1000)
+        }, 1000);
+        $scope.addUserToService = function(){
+            Highscore.obj.name = $scope.userName;
+        }; 
     };
 }]);
 

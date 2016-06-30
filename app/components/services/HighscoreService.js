@@ -4,7 +4,8 @@
 angular.module('myApp').factory('Highscore', function () {
 
     var obj = {
-        highscore : 0
+        highscore : 0,
+        userName : ""
     };
 
 

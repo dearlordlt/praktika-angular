@@ -16,10 +16,10 @@
 	
 </div>
 <div ng-show="condition100()">
-	<buntton ng-click="cookieAdder100()">
+	<button ng-click="cookieAdder100()">
 	<span class="glyphicon glyphicon-asterisk" aria-hidden="true">Bake 100 cookies per sec
 	</span>
-	</buntton>
+	</button>
 </div>
 
 <div>
@@ -27,7 +27,13 @@
 		<span class="glyphicon glyphicon-asterisk" aria-hidden="true">check highscore
 	</span>
 	</button>
-</div>-
+</div>
 
 <p>{{highScore}}</p>
+
+<test-directive game-name="440"></test-directive>
+
+<input type="text" class="form-control" ng-model="userName" />
+<button ng-click="addUserToService()">add user</button>
+<pre>{{userName | json}}</pre>
 
