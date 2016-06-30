@@ -31,7 +31,12 @@
 
 <p>{{highScore}}</p>
 
-<test-directive game-name="440"></test-directive>
+<input type="text" class="form-control" ng-model="movieID" />
+
+<button ng-click="updateMovies()">update</button>
+<test-directive id="movieID" json-get="updateMovies"></test-directive>
+
+
 
 <input type="text" class="form-control" ng-model="userName" />
 <button ng-click="addUserToService()">add user</button>

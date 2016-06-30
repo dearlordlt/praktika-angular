@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$interval','Highscore' , function ($scope, $interval, Highscore) {
+angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$interval','Highscore','moviesearch' , function ($scope, $interval, Highscore, moviesearch) {
     $scope.randomThing = "This will be a cookie clicker game";
 
    //~~~~~~~~~~~~~~~~~~~~~~~~variable init~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -8,7 +8,7 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
     $scope.priceInc = 5;
     $scope.highScore = Highscore.obj.highscore;
     $scope.userName = Highscore.obj.name;
-    
+    $scope.movieID= moviesearch.movie.movieData;
     var add = null;
     var add2 = null;
     var add1 = null;
@@ -63,9 +63,18 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
                 $scope.highScore = Highscore.obj.highscore;
             }
         }, 1000);
-        $scope.addUserToService = function(){
-            Highscore.obj.name = $scope.userName;
-        }; 
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~adding functions~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        
+        
     };
+    $scope.updateMovies = function(){
+
+    };
+    $scope.addUserToService = function(){
+        Highscore.obj.name = $scope.userName;
+    };
+    
 }]);
 

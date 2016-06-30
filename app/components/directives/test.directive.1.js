@@ -4,15 +4,26 @@ angular.module('myApp').directive('testDirective', function() {
     return{
         templateUrl: 'components/directives/templates/test.directive.1.tmpl.html',
         scope: {
-            dataName : '=dataName'
+            id : '=id',
+            jsonGet : '=jsonGet'
         },
-        controller: function($scope, $http) {
-            $scope.starwarsData = 'Loading';
-            $http.get(' http://swapi.co/api/people/1/').success(function(responce) {
+        controller: function($scope, $http, moviesearch) {
+            $scope.starwarsData = 'loading';
+            $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
                 console.log(responce);
                 $scope.starwarsData = responce;
             });
+            $scope.jsonGet = function(){
+                $scope.starwarsData = 'loading';
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function(responce) {
+                    console.log(responce);
+                    $scope.starwarsData = responce;
+                });
+            };
+            
         }
+
+
 
     }
 });
