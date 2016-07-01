@@ -3,30 +3,52 @@
     {
       "name": "Jonas",
       "email": "jonas@jonas.lt",
-      "cash": 500
+      "cash": 500,
+      "info": {
+        "city": "LA",
+        "country": "USA",
+        "street": "Santa Monica"
+      }
     },
     {
-      "name": {
-        "first": "petras",
-        "last": "petraitis"
-      },
+      "name": "Petras",
       "email": "petras@jonas.lt",
-      "cash": 654
+      "cash": 654,
+      "info": {
+        "city": "LA",
+        "country": "USA",
+        "street": "Santa Monica"
+      }
     },
     {
       "name": "Ona",
       "email": "ona@jonas.lt",
-      "cash": 14
+      "cash": 14,
+      "info": {
+        "city": "Toronto",
+        "country": "Canada",
+        "street": "Not Santa Monica"
+      }
     },
     {
       "name": "Kęstas",
       "email": "kestas@jonas.lt",
-      "cash": 561565
+      "cash": 561565,
+      "info": {
+        "city": "London",
+        "country": "UK",
+        "street": "Brexit"
+      }
     },
     {
       "name": "Marytė",
       "email": "maryte@jonas.lt",
-      "cash": 0
+      "cash": 0,
+      "info": {
+        "city": "Vilnius",
+        "country": "Lietuva",
+        "street": "Giedraiciu g."
+      }
     }
   ]
 }
