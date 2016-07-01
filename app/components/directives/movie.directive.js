@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').directive('movieDirective', function() {
+angular.module('myApp').directive('movieDirective', function () {
     return {
         templateUrl: 'components/directives/templates/movies.template.html',
         scope: {
@@ -13,7 +13,7 @@ angular.module('myApp').directive('movieDirective', function() {
         controller: function ($scope, $http) {
 
             $scope.myMovie = 'Loading';
-            $http.get('http://www.omdbapi.com/?t=' +$scope.movieNumber + '&y=&plot=short&r=json').success(function (response2) {
+            $http.get('http://www.omdbapi.com/?t=' + $scope.movieNumber + '&y=&plot=short&r=json').success(function (response2) {
                 console.log(response2);
                 $scope.myMovie = response2;
                 console.log($scope.movieNumber);
@@ -23,6 +23,11 @@ angular.module('myApp').directive('movieDirective', function() {
                 $http.get('http://www.omdbapi.com/?t=' + $scope.movieNumber + '&y=&plot=short&r=json').success(function (response2) {
                     console.log(response2);
                     $scope.myMovie = response2;
+
+                    $scope.count = 0;
+                    for (var k in $scope.myMovie) if ($scope.myMovie.hasOwnProperty(k)) $scope.count++;
+
+
                 });
             }
         }
