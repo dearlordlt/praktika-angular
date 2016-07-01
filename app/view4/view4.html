@@ -20,6 +20,26 @@
 	<span class="glyphicon glyphicon-asterisk" aria-hidden="true">Bake 100 cookies per sec
 	</span>
 	</button>
-	
 </div>
+
+<div>
+	<button ng-click="scoreChecker()">
+		<span class="glyphicon glyphicon-asterisk" aria-hidden="true">check highscore
+	</span>
+	</button>
+</div>
+
+<p>{{highScore}}</p>
+
+<input type="text" class="form-control" ng-model="movieID" />
+
+<button ng-click="updateMovies()">update</button>
+
+<test-directive  id="movieID" json-get="updateMovies"></test-directive>
+
+
+
+<input type="text" class="form-control" ng-model="userName" />
+<button ng-click="addUserToService()">add user</button>
+<pre>{{userName | json}}</pre>
 
