@@ -12,6 +12,9 @@ angular.module('myApp').directive('testDirective', function () {
             $scope.jsonGet = function () {
                 $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
                     $scope.starwarsData = responce;
+                    for(var i=0;i<$scope.starwarsData.characters.length;i++) {
+                        $scope.starwarsData.characters[i] = "<a href=" + $scope.starwarsData.characters[i]+">" +"</a>"
+                    }
                     $scope.characters();
                 });
             };
