@@ -1,5 +1,80 @@
+<!--forms a list which goes over all the keys/values inside json object-->
+<!--the nested list checks to see if value has a substring "http" and if so shows the list-->
 <ul >
-    <li ng-repeat="(key, value) in starwarsData">{{key}}: {{value}}</li>
+    <li ng-repeat="(key, value) in starwarsData ">
+
+        {{key | moviefilter}}: {{value | moviefilter1 }}
+        <ul ng-if="value.length > 0 && value[0].indexOf('http') > -1">
+            <li ng-repeat="link in value"><a href="{{link}}">{{link}}</a></li>
+
+        </ul>
+    </li>
+
+    <div ng-controller="DropdownCtrl">
+        <!-- Simple dropdown -->
+        <li>
+        <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown" uib-dropdown-toggle>
+            Characters
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+            <li ng-repeat="choice in items">
+              <a href><a href="{{choice}}">{{choice}}</a></a>
+            </li>
+          </ul>
+        </span>
+        </li>
+
+        <li>
+         <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown1" uib-dropdown-toggle>
+            Planets
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown1">
+            <li ng-repeat="choice in planets">
+              <a href><a href="{{choice}}">{{choice}}</a></a>
+            </li>
+          </ul>
+        </span>
+    </li>
+        <li>
+         <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown2" uib-dropdown-toggle>
+            Starships
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown2">
+            <li ng-repeat="choice in starships">
+              <a href><a href="{{choice}}">{{choice}}</a></a>
+            </li>
+          </ul>
+        </span>
+        </li>
+        <li>
+         <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown3" uib-dropdown-toggle>
+            Vehicles
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown3">
+            <li ng-repeat="choice in vehicles">
+              <a href><a href="{{choice}}">{{choice}}</a></a>
+            </li>
+          </ul>
+        </span>
+        </li>
+        <li>
+         <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown4" uib-dropdown-toggle>
+            Species
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown4">
+            <li ng-repeat="choice in species">
+              <a href><a href="{{choice}}">{{choice}}</a></a>
+            </li>
+          </ul>
+        </span>
+        </li>
+
+    </div>
 </ul>
 
 <ul >
