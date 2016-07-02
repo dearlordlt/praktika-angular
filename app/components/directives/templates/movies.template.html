@@ -1,1 +1,8 @@
-<pre> {{myMovie | json}}</pre>
+
+<ul >
+     <!-- <li ng-repeat="(key,value) in myMovie">{{key | capitalFilter}}:{{value}}</li>  -->
+    <li ng-repeat="(key,value) in myMovie track by $index"> {{$index+1}} {{key | toUpperCase}}:{{value}}</li>
+</ul>
+
+
+

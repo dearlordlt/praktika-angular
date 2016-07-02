@@ -36,5 +36,7 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
      * Actual function is on directive, only needed to reference
      */
     $scope.nereikalingaFunkcija = function(){};
+
+
 }]);
 

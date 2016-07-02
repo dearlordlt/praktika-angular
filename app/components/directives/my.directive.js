@@ -6,7 +6,7 @@ angular.module('myApp').directive('moviesDirective', function() {
         scope: {
             movieName: '=movieName'
         },
-        controller: function($scope, $http, myService) {
+        controller: function($scope, $http) {
             $scope.movieData = 'Loading';
             $http.get('http://www.omdbapi.com/?t='+$scope.movieName+'&y=&plot=short&r=json').success(function(resp) {
                 console.log(resp);
