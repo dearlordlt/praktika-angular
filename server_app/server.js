@@ -15,19 +15,27 @@ mongoose.connect('mongodb://localhost/myappdatabase');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 3000;        // port
+var port = process.env.PORT || 9001;        // port
 
 // ROUTES
 // =============================================================================
 var router = express.Router();
 
 router.use(function (req, res, next) {
+    //Allow CORS
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    //Response type
+    res.setHeader("Content-Type", "application/json");
+
+    //Log
     console.log('API CALL: ['.blue + (' "' + req.url + '"').red + ' ]'.blue);
     next(); // go to the next routes and don't stop here
 });
 
 /**
- * home route (GET http://localhost:3000/api)
+ * home route (GET http://localhost:9001/api)
  */
 router.get('/', function (req, res) {
     res.json({
@@ -43,10 +51,8 @@ router.get('/', function (req, res) {
 });
 
 router.route('/users')
-// create a users (accessed at POST http://localhost:3000/api/users)
+// create a users (accessed at POST http://localhost:9001/api/users)
     .post(function (req, res) {
-
-        res.setHeader("Content-Type", "application/json");
 
         //EXAMPLE:
         //{"name" : "User X", "username" : "user1", "password" : "user1", "admin" : "false", "location" : "Vilnius"}
@@ -88,7 +94,7 @@ router.route('/users')
     });
 
 router.route('/users/:user_id')
-// get the bear with that id (accessed at GET http://localhost:3000/api/users/:user_id)
+// get the bear with that id (accessed at GET http://localhost:9001/api/users/:user_id)
     .get(function (req, res) {
         User.findById(req.params.user_id, function (err, user) {
             if (err) {
@@ -151,23 +157,4 @@ app.use('/api', router);
 app.listen(port);
 var logMessage = 'API is running on: http://localhost:' + port + '/api';
 console.log(logMessage.green);
-
-/*
- var petras = new User({
- name: 'Petras',
- username: 'lolz666',
- password: 'password'
- });
-
- petras.save(function(err) {
- if (err) throw err;
- console.log('User saved successfully!');
- });
-
- User.find({}, function(err, users) {
- if (err) throw err;
-
- // object of all the users
- console.log(users);
- });*/
 
