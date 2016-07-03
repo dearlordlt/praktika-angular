@@ -12,15 +12,6 @@ angular.module('myApp').directive('movieDirective', function () {
         },
         controller: function ($scope, $http) {
 
-            $scope.myMovie = 'Loading';
-            $http.get('http://www.omdbapi.com/?t=' + $scope.movieNumber + '&y=&plot=short&r=json').success(function (response2) {
-
-                $scope.myMovie = response2;
-                console.log($scope.movieNumber);
-                $scope.toArray();
-
-
-            });
 
             $scope.readingMovie = function () {
                 $http.get('http://www.omdbapi.com/?t=' + $scope.movieNumber + '&y=&plot=short&r=json').success(function (response2) {
@@ -41,11 +32,7 @@ angular.module('myApp').directive('movieDirective', function () {
             }
 
             //-------------------------------Dropdown--------------------------------------
-            $scope.items = [
-                'The first choice!',
-                'And another choice for you.',
-                'but wait! A third!'
-            ];
+
 
             $scope.status = {
                 isopen: false
@@ -62,6 +49,26 @@ angular.module('myApp').directive('movieDirective', function () {
             };
 
             $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+
+            //----------------------------------Rating---------------------------------------------
+
+            $scope.rate = 7;
+            $scope.max = 10;
+            $scope.isReadonly = false;
+
+            $scope.hoveringOver = function(value) {
+                $scope.overStar = value;
+                $scope.percent = 100 * (value / $scope.max);
+            };
+
+            $scope.ratingStates = [
+                {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+                {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+                {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+                {stateOn: 'glyphicon-heart'},
+                {stateOff: 'glyphicon-off'}
+            ];
+
         }
     }
 });

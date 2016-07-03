@@ -19,22 +19,6 @@ angular.module('myApp.view5', ['ngRoute']).controller('View5Ctrl',  ['$scope','m
 
     };
 
-  //  $scope.veikla= false;
-
-  //  $http.get('http://localhost:8000/db/jurates.db.json').success(function (response) {
-   //    $scope.veikla = response;
-   // });
-
-   // $scope.number = movieService.numberOfMovie;
-   // $scope.addMovieNumber = function() {
-    //movieService.numberOfMovie = $scope.number;
-      //  console.log(movieService.numberOfMovie);
-   // };
-
-
-    /**
-     * Actual function is on directive, only needed to reference
-     */
     $scope.nereikalingaFunkcija = function(){};
 
 
