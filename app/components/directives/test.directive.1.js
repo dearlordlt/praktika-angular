@@ -5,7 +5,7 @@ angular.module('myApp').directive('testDirective', function () {
         templateUrl: 'components/directives/templates/test.directive.1.tmpl.html',
         scope: {
             id: '=?id',
-            jsonGet: '=?jsonGet'
+            jsonGet: '=?jsonGet',
         },
         controller: function ($scope, $http) {
             $scope.jsonGet = function () {
@@ -26,6 +26,37 @@ angular.module('myApp').directive('testDirective', function () {
                     });
                 }
             };
+            $scope.items = [];
+            $scope.items2 = [];
+            $scope.$watch('id',function(){
+                if($scope.id){
+                    $scope.getMovieData();
+                }
+            });
+            $scope.getMovieData= function() {
+
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
+                    $scope.items = responce.characters;
+
+                });
+                $http.get(' http://swapi.co/api/films/' +$scope.id + '/').success(function (responce) {
+                    $scope.planets = responce.planets;
+
+                });
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
+                    $scope.starships = responce.starships;
+
+                });
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
+                    $scope.vehicles = responce.vehicles;
+
+                });
+                $http.get(' http://swapi.co/api/films/' + $scope.id + '/').success(function (responce) {
+                    $scope.species = responce.species;
+                });
+            };
+
+
         }
     }
 });
