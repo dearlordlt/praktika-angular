@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User methods</title>
+</head>
+<body>
+<h3>User Authentication</h3>
+<div class="Authentication">
+    <input type="text" class="form-control" ng-model="userName"/>
+    <input type="text" class="form-control" ng-model="password"/>
+    <button ng-click="Authenticate()">Authenticate</button>
+    <div>{{authentication.data | json}}</div>
+</div>
+<h3>Calling all users! All users get over here!!</h3>
+<div class="Getting users">
+    <button ng-click="getAllUsers()">Get all users</button>
+    <div>{{allUserData.data | json}}</div>
+</div>
+<h3>New user in ya go along with the rest of them!</h3>
+<div class="Creating a user">
+    <input type="text" class="form-control" ng-model="inputName" placeholder="Desired Name"/>
+    <input type="text" class="form-control" ng-model="inputUserName" placeholder="Desired Username"/>
+    <input type="text" class="form-control" ng-model="inputPassword" placeholder="Desired Username"/>
+    <input type="text" class="form-control" ng-model="admin" placeholder="Admin"/>
+    <input type="text" class="form-control" ng-model="location" placeholder="Desired Location"/>
+    <button ng-click="createUser()">Create user with entered info</button>
+    <div>{{creation.message | json}}</div>
+</div>
+<h3>I will find you.. And i will kill you...</h3>
+<div class="Searching a user by ID">
+    <input type="text" class="form-control" ng-model="userId" placeholder="Search by ID"/>
+    <button ng-click="getUserById()">Work</button>
+    <div>{{userIDResponce | json}}</div>
+</div>
+<div>
+
+</div>
+
+</body>
+</html>
