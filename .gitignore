@@ -8,3 +8,4 @@ tmp
 /node_modules/
 /app/bower_components/
 /server_app/db/
+/db/
