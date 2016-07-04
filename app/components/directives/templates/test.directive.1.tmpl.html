@@ -1,11 +1,12 @@
 <!--forms a list which goes over all the keys/values inside json object-->
 <!--the nested list checks to see if value has a substring "http" and if so shows the list-->
 <ul >
-    <li ng-repeat="(key, value) in starwarsData ">
 
+    <li ng-repeat="(key, value) in starwarsData "  >
+        <div ng-if="key !=='characters' && key !=='vehicles' && key !=='starships' && key !=='species' && key !=='planets'">
         {{key | moviefilter}}: {{value | moviefilter1 }}
-        <div ng-if="value.length > 0 && value[0].indexOf('http') > -1">
-            <li>
+        </div>
+        <div ng-if="key==='characters'">
         <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown" uib-dropdown-toggle>
               Characters
@@ -16,10 +17,10 @@
               </li>
           </ul>
         </span>
-            </li>
+    </div>
 
-            <li>
-         <span uib-dropdown on-toggle="toggled(open)">
+        <div ng-if="key === 'planets'">
+        <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown1" uib-dropdown-toggle>
               Planets
           </a>
@@ -29,8 +30,9 @@
               </li>
           </ul>
         </span>
-            </li>
-            <li>
+        </div>
+
+    <div ng-if="key === 'starships'" >
          <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown2" uib-dropdown-toggle>
               Starships
@@ -41,9 +43,9 @@
               </li>
           </ul>
         </span>
-            </li>
-            <li>
-         <span uib-dropdown on-toggle="toggled(open)">
+    </div>
+        <div ng-if="key === 'vehicles'">
+        <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown3" uib-dropdown-toggle>
               Vehicles
           </a>
@@ -53,9 +55,10 @@
               </li>
           </ul>
         </span>
-            </li>
-            <li>
-         <span uib-dropdown on-toggle="toggled(open)">
+        </div>
+
+    <div ng-if="key==='species'">
+        <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown4" uib-dropdown-toggle>
               Species
           </a>
@@ -65,11 +68,8 @@
               </li>
           </ul>
         </span>
-            </li>
+    </div>
 
-            <!--<li ng-repeat="link in value"><a href="{{link}}">{{link}}</a></li>-->
-
-        </div>
     </li>
 
 </ul>
