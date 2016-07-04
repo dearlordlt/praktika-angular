@@ -8,7 +8,8 @@ angular.module('myApp', [
     'myApp.view2',
     'myApp.view3',
     'myApp.view5',
-    'myApp.view4'
+    'myApp.view4',
+    'myApp.usersDB'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
@@ -27,6 +28,9 @@ angular.module('myApp', [
     }).when('/view5', {
         templateUrl: 'view5/view5.html',
         controller: 'View5Ctrl'
+    }).when('/usersDB', {
+        templateUrl: 'users.db.jurates/users.db.jurates.html',
+        controller: 'usersDBCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});

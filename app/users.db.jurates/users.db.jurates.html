@@ -1,0 +1,38 @@
+<h1>Good day!</h1>
+<p>Please login before executing further actions:</p>
+
+<div class="form-group">
+    <input type="text" class="form-control" placeholder="Enter your username" ng-model="username">
+    <input type="password" class="form-control" placeholder="Enter your password" ng-model="password">
+    <button ng-click="authentication()">Login</button>
+</div>
+
+<div ng-if="userInfo.success == true">
+    <p>Authentication successful! Please continue.</p>
+
+    <p>Enter method (GET, POST, ID, PUT, DELETE)</p>
+
+    <input type="text" class="form-control" placeholder="Next action?" ng-model="enter">
+    <div ng-if="enter === 'GET'">
+        <button ng-click="actionGet()">Enter</button>
+        <div>{{allUsers}}</div>
+    </div>
+
+    <div ng-if="enter === 'POST'">
+        <div>Name:</div>
+        <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
+        <div>Username:</div>
+        <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
+        <div>Password</div>
+        <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+        <div>Admin:</div>
+        <input type="text" class="form-control" placeholder="Admin rights" ng-model="user.admin">
+        <div>Location</div>
+        <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
+        <button ng-click="actionPost()">Enter</button>
+
+
+    </div>
+
+</div>
+
