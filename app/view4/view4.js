@@ -74,6 +74,8 @@ angular.module('myApp.view4', ['ngRoute']).controller('View4Ctrl', ['$scope', '$
     $scope.addUserToService = function(){
         Highscore.obj.name = $scope.userName;
     };
+
+    
     
 }]);
 
