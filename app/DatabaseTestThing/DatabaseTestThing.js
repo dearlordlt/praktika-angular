@@ -6,6 +6,9 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     $scope.user = {
 
     };
+    $scope.userUpdate={
+
+    };
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~HTML needed objects~~~~~~~~~~~~~~~~~~~~~~
     $scope.adminOptions = {
@@ -54,7 +57,23 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
         }).success(function(response) {
             $scope.creation = "User was successfully created"
         }).error(function(error){
-            $scope.creation = "An error has occurred"
+
+            if(!$scope.user.name){
+                $scope.creation="Missing  name"
+            }
+            else if(typeof $scope.user.userName === "undefined"){
+                $scope.creation="Missing username"
+            }
+            else if(typeof !$scope.user.password === "undefined"){
+                $scope.creation="Missing  password"
+            }
+            else if(typeof !$scope.user.admin === "undefined"){
+                $scope.creation="Missing  admin"
+            }
+            else if(typeof $scope.user.location === "undefined"){
+                $scope.creation="Missing  location"
+            }
+
         })
 
     };
@@ -69,21 +88,21 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     $scope.updateUserById = function(){
         $http({
             method: 'PUT',
-            url: 'http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$scope.token,
-            data: $scope.user
+            url: 'http://localhost:9001/api/users/'+$scope.userUpdate._id+'/?token='+$scope.token,
+            data: $scope.userUpdate
         }).success(function(response) {
-            $scope.userUpdateResponce=response;
+            $scope.userUpdateResponce="User info was updated";
         })
     };
     $scope.deleteUserById = function(){
         $http.delete('http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$scope.token).success(
             function (response){
-                $scope.userDeleteResponce=response;
+                $scope.userDeleteResponce="User was successfully deleted";
             })
 
 
     };
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+    $scope.isCollapsed = true;
 
         }]);
