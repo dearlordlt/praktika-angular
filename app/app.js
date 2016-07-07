@@ -10,7 +10,8 @@ angular.module('myApp', [
     'myApp.view5',
     'myApp.view4',
     'ngCookies',
-    'myApp.DatabaseTestThing'
+    'myApp.DatabaseTestThing',
+    'myApp.CoolLoginPage'
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
 
 
@@ -36,6 +37,9 @@ angular.module('myApp', [
     }).when('/DatabaseTestThing', {
         templateUrl: 'DatabaseTestThing/DatabaseTestThing.html',
         controller: 'DatabaseTestCtrl'
+    }).when('/CoolLoginPage', {
+        templateUrl: 'LoginPage/CoolLoginPage.html',
+        controller: 'CoolLoginPageCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});

@@ -1,7 +1,7 @@
 /**
  * Created by Ausra Faturova on 04/07/2016.
  */
-angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestCtrl', ['$scope','$http', function ($scope,$http) {
+angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestCtrl', ['$scope','$http', '$cookies','errorPrintingService', function ($scope,$http,$cookies,errorPrintingService) {
     //~~~~~~~~~~~~~~~~~~~~~~~~User object creation~~~~~~~~~~~~~~~~~~~~~~
     $scope.user = {
 
@@ -9,6 +9,7 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     $scope.userUpdate={
 
     };
+    $scope.errorData='';
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~HTML needed objects~~~~~~~~~~~~~~~~~~~~~~
     $scope.adminOptions = {
@@ -16,32 +17,14 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
         option2: 'true'
     };
 
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~Authentication~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    $scope.Authenticate = function(){
-            $http({
-                method: 'POST',
-                url: 'http://localhost:9001/api/authenticate',
-                data: {
-                    username: $scope.userName,
-                    password: $scope.password
-                }
-            }).success(function(response) {
-                    $scope.authentication=response;
-                    $scope.token=response.token;
-            }).error(function(err){
-                $scope.authentication=err;
-            })
-};
     $scope.clickChecker=false;
+    $scope.token=$cookies.get('cool_token');
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~User functions~~~~~~~~~~~~~~~~~~~~~~~~
     $scope.getAllUsers= function() {
         if( $scope.clickChecker===false){
-        $http.get('http://localhost:9001/api/users/?token=' + $scope.token).success(function (response) {
+        $http.get('http://localhost:9001/api/users/?token=' + $cookies.get('cool_token')).success(function (response) {
             $scope.allUserData = response;
-        }).error(function (error) {
-            alert("such error");
-
+            console.log( response);
         });
             $scope.clickChecker=!$scope.clickChecker;
         }
@@ -52,7 +35,7 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     $scope.createUser = function(){
         $http({
             method: 'POST',
-            url: 'http://localhost:9001/api/users/?token='+ $scope.token,
+            url: 'http://localhost:9001/api/users/?token='+ $cookies.get('cool_token'),
             data: $scope.user
         }).success(function(response) {
             $scope.creation = "User was successfully created"
@@ -80,29 +63,45 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     $scope.getUserById = function(){
         $http({
             method: 'GET',
-            url: 'http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$scope.token
+            url: 'http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$cookies.get('cool_token')
         }).success(function(response) {
+            $scope.errorData='';
             $scope.userIDResponce=response;
-        })
+            console.log(response);
+
+        }).error(function(error){
+            $scope.errorData = errorPrintingService.error;
+        });
+
     };
+
     $scope.updateUserById = function(){
         $http({
             method: 'PUT',
-            url: 'http://localhost:9001/api/users/'+$scope.userUpdate._id+'/?token='+$scope.token,
+            url: 'http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$cookies.get('cool_token'),
             data: $scope.userUpdate
         }).success(function(response) {
             $scope.userUpdateResponce="User info was updated";
-        })
+            console.log( response);
+
+        }).error(function(error){
+            $scope.errorData = errorPrintingService.error;
+        });
+
     };
     $scope.deleteUserById = function(){
-        $http.delete('http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$scope.token).success(
+        $http.delete('http://localhost:9001/api/users/'+$scope.user._id+'/?token='+$cookies.get('cool_token')).success(
             function (response){
                 $scope.userDeleteResponce="User was successfully deleted";
-            })
+                console.log( response);
+            }).error(function(error){
+            $scope.errorData = errorPrintingService.error;
+        });
 
 
     };
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UI stuff~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     $scope.isCollapsed = true;
+
 
         }]);

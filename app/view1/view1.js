@@ -7,7 +7,7 @@ angular.module('myApp.view1', []).controller('View1Ctrl', ['$scope', '$rootScope
 
         $scope.userList = false;
 
-        $http.get('http://localhost:8080/db/db/db.json').success(function (response) {
+        $http.get('http://localhost:8080/db/db.json').success(function (response) {
             $scope.userList = response;
         });
 

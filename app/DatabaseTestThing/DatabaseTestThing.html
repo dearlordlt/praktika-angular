@@ -6,23 +6,11 @@
 </head>
 <body>
 
-<h3>User Authentication</h3>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER AUTHENTICATION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<div class="Authentication">
-    <input type="text" class="form-control" ng-model="userName"/>
-    <input type="text" class="form-control" ng-model="password"/>
-    <button ng-click="Authenticate()">Authenticate</button>
-    <div>{{authentication.data | json}}</div>
-</div>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<div ng-if="authentication.message ==='Token is set!'" class="All of the user function">
-
     <!--~~~~~~~~~~~~~~~~~~~~~~GET ALL USERS~~~~~~~~~~~~~~~~~~~~~~~~-->
-
     <h3>Calling all users! All users get over here!!</h3>
-    <button ng-click="getAllUsers()">Get all users</button>
+    <button ng-click="getAllUsers()">Show user list</button>
 <div ng-show="clickChecker" class="Getting users">
         <ul>
             <li ng-repeat="users in allUserData">
@@ -56,45 +44,44 @@
 <h3>I will find you.. And i will kill you...</h3>
 
 <div class="Searching a user by ID">
+
     <input type="text" class="form-control" ng-model="user._id" placeholder="Search by ID"/>
     <button ng-click="getUserById()">Search by ID</button>
+    <div ng-if="errorData !== ''">{{errorData}} </div>
     <ul>
         <li ng-repeat="(key, value) in userIDResponce">{{key}}:{{value}}</li>
     </ul>
 
-</div>
+    <div ng-if="userIDResponce">
 
-    <!--~~~~~~~~~~~~~~~~~~~~~~UPDATE USER INFO BY ID~~~~~~~~~~~~~~~~~~~~~-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~Buttons~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<h4>Let's get a new name (or more!)</h4>
-    <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Open user info update form</button>
-    <hr>
-    <div uib-collapse="isCollapsed">
-        <div class="well well-lg">
-<div>
-    <input type="text" class="form-control" ng-model="userUpdate._id" placeholder="Enter user ID"/>
-    <div>
-        <input type="text" class="form-control" ng-model="userUpdate.name" placeholder="user.name"/>
-        <input type="text" class="form-control" ng-model="userUpdate.username" placeholder="Desired Username"/>
-        <input type="text" class="form-control" ng-model="userUpdate.password" placeholder="Desired Username"/>
-        <input type="text" class="form-control" ng-model="userUpdate.admin" placeholder="Admin"/>
-        <input type="text" class="form-control" ng-model="userUpdate.location" placeholder="Desired Location"/>
-    </div>
-    <button ng-click="updateUserById()">Update user info</button>
-    <div>{{userUpdateResponce}}</div>
-</div>
-            </div>
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Open user info update form</label>
+            <label class="btn btn-primary" ng-click="deleteUserById()"  ng-model="checkModel.middle" uib-btn-checkbox>Delete user</label>
         </div>
 
-    <!--~~~~~~~~~~~~~~~~~~~~~~DELETE A USER~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--~~~~~~~~~~~~~~~~~~~User update form~~~~~~~~~~~~~~~~~~~~-->
 
-<h4>BE GONE!(make sure to enter ID :))</h4>
+<div uib-collapse="isCollapsed">
+        <div class="well well-lg">
 
-<div>
-    <input type="text" class="form-control" ng-model="user._id" placeholder="Enter user ID"/>
-    <button ng-click="deleteUserById()">Delete User</button>
-    <div>{{userDeleteResponce}}</div>
+                <div>
+                    <input type="text" class="form-control" ng-model="userUpdate.name" placeholder="user.name"/>
+                    <input type="text" class="form-control" ng-model="userUpdate.username" placeholder="Desired Username"/>
+                    <input type="text" class="form-control" ng-model="userUpdate.password" placeholder="Desired Username"/>
+                    <input type="text" class="form-control" ng-model="userUpdate.admin" placeholder="Admin"/>
+                    <input type="text" class="form-control" ng-model="userUpdate.location" placeholder="Desired Location"/>
+                </div>
+                <button ng-click="updateUserById()">Update user info</button>
+                <div>{{userUpdateResponce}}</div>
+
+        </div>
+    </div>
+        <!--~~~~~~~~~~~~~~~~~~~User delete response~~~~~~~~~~~~~~~~~~-->
+        <div>{{userDeleteResponce}}</div>
 </div>
+
 </div>
 
 </body>
