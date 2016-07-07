@@ -1,10 +1,10 @@
-angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
     $scope.user = {};
 
     $scope.showInput = false;
 
     // --------------------------------------- authentication --------------------------
-    $scope.authentication = function () {
+   /* $scope.authentication = function () {
         $http({
             method: 'POST',
             url: 'http://localhost:9001/api/authenticate',
@@ -17,11 +17,11 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
             $scope.token = response.token;
             console.log($scope.userInfo);
         });
-    };
+    };*/
 
     // ------------------------------- GETing all users -----------------------------------
     $scope.actionGet = function () {
-        $http.get('http://localhost:9001/api/users/?token=' + $scope.token).success(function (response) {
+        $http.get('http://localhost:9001/api/users/?token=' + $cookies.get('login.token')).success(function (response) {
             $scope.allUsers = response;
             console.log($scope.allUsers);
         });
@@ -32,7 +32,7 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
         console.log($scope.user);
         $http({
             method: 'POST',
-            url: 'http://localhost:9001/api/users/?token=' + $scope.token,
+            url: 'http://localhost:9001/api/users/?token=' + $cookies.get('login.token'),
             data: $scope.user
         }).success(function (response) {
             $scope.addedUser = response;
@@ -44,7 +44,7 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
 
     //------------------------------- getting user by ID ------------------------------
     $scope.actionID = function () {
-        $http.get('http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $scope.token).success(function (response) {
+        $http.get('http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $cookies.get('login.token')).success(function (response) {
             $scope.userID = response;
             console.log($scope.userID);
         });
@@ -66,7 +66,7 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
         }
         $http({
             method: 'PUT',
-            url: 'http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $scope.token,
+            url: 'http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $cookies.get('login.token'),
             data: {
                 name: $scope.userID.name,
                 username: $scope.userID.username,
@@ -82,7 +82,7 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
 
     //---------------------------------------- deleting user --------------------------------------------
     $scope.deleteUser = function () {
-        $http.delete('http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $scope.token).success(function (response) {
+        $http.delete('http://localhost:9001/api/users/' + $scope.user.id + '/?token=' + $cookies.get('login.token')).success(function (response) {
             $scope.deletedUser = response;
         });
     };

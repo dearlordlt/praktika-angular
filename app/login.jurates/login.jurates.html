@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
 <body>
+<h1>Good day!</h1>
+
+<p>Please login before executing further actions:</p>
+
+<!----------------------------------- authentication ---------------------------------------->
+<div class="form-group">
+    <input type="text" class="form-control" placeholder="Enter your username" ng-model="username">
+    <input type="password" class="form-control" placeholder="Enter your password" ng-model="password">
+    <button ng-click="authentication()">Login</button>
+</div>
 
 </body>
 </html>
