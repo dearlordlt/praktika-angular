@@ -9,7 +9,8 @@ angular.module('myApp', [
     'myApp.view3',
     'myApp.view5',
     'myApp.view4',
-    'ngCookies'
+    'ngCookies',
+    'myApp.DatabaseTestThing'
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
 
 
@@ -32,6 +33,9 @@ angular.module('myApp', [
     }).when('/view5', {
         templateUrl: 'view5/view5.html',
         controller: 'View5Ctrl'
+    }).when('/DatabaseTestThing', {
+        templateUrl: 'DatabaseTestThing/DatabaseTestThing.html',
+        controller: 'DatabaseTestCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});
