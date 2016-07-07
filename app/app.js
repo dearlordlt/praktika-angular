@@ -16,6 +16,9 @@ angular.module('myApp', [
 
     $httpProvider.interceptors.push('interceptorService');
 
+    'myApp.view4',
+    'myApp.usersDB'
+]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
     $routeProvider.when('/view1', {
@@ -36,6 +39,9 @@ angular.module('myApp', [
     }).when('/DatabaseTestThing', {
         templateUrl: 'DatabaseTestThing/DatabaseTestThing.html',
         controller: 'DatabaseTestCtrl'
+    }).when('/usersDB', {
+        templateUrl: 'users.db.jurates/users.db.jurates.html',
+        controller: 'usersDBCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});
