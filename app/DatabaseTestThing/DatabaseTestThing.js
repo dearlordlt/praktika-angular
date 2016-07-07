@@ -1,7 +1,7 @@
 /**
  * Created by Ausra Faturova on 04/07/2016.
  */
-angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestCtrl', ['$scope','$http', '$cookies','errorPrintingService', function ($scope,$http,$cookies,errorPrintingService) {
+angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestCtrl', ['$scope','$http', '$cookies','errorPrintingService','$uibModal', function ($scope,$http,$cookies,errorPrintingService,$uibModal) {
     //~~~~~~~~~~~~~~~~~~~~~~~~User object creation~~~~~~~~~~~~~~~~~~~~~~
     $scope.user = {
 
@@ -103,5 +103,22 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UI stuff~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     $scope.isCollapsed = true;
 
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'DatabaseTestThing/modals/DatabaseTestThingTmpl.html',
+            controller: 'DatabaseTestThingCtrl',
+            size: 'sm',
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        })};
 
         }]);
