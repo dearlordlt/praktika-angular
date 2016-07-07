@@ -6,7 +6,7 @@
         </div>
     </script>
 
-    <!------------------------------- modals ------------------------------------>
+
 
 </head>
 
@@ -35,9 +35,6 @@
         {{alerts.successfulAuthentication.msg}}
     </uib-alert>
 
-    <p>Enter method (GET, POST, ID, PUT, DELETE)</p>
-
-    <input type="text" class="form-control" placeholder="Next action?" ng-model="enter">
 
     <!---------------------------------- modals ----------------------------------------->
 
@@ -96,7 +93,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button ng-click="actionPost()" type="button" class="btn btn-primary">Save changes</button>
+                    <button ng-click="actionPost()" type="button" class="btn btn-primary" data-dismiss="modal">Add user</button>
                 </div>
             </div>
         </div>
@@ -106,106 +103,33 @@
     <div>Enter user ID:</div>
     <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
 
-    <button ng-click="actionID()">Enter</button>
+    <!--<button ng-click="actionID()">Enter</button>
     <pre>{{userID | json}}</pre>
+-->
+    <button ng-click="actionID()" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+            data-target="#searchByIdModal">Search
+    </button>
 
+    <div class="modal fade" id="searchByIdModal" tabindex="-1" role="dialog" aria-labelledby="searchByIdModalTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="searchByIdModalTitle">User {{userID.name}}</h4>
+                </div>
+                <div class="modal-body">
+                   <div>
+                        <input  ng-repeat="(key,value) in userID" type="text" class="form-control" placeholder={{value}} ng-model="userID[key]">
 
-    <!------------------------------------------- actions with ID ------------------------------------------>
-
-    <div class="dropdown">
-        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Actions with ID
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li></li>
-
-        </ul>
-    </div>
-
-    <!-----------------------------------------GETing all users-------------------------------->
-    <div ng-if="enter === 'GET'">
-        <button ng-click="actionGet()">Enter</button>
-        <div>{{allUsers}}</div>
-    </div>
-
-    <!--------------------------------------adding user----------------------------------->
-    <div ng-if="enter === 'POST'">
-        <div>Name:</div>
-        <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
-
-        <div>Username:</div>
-        <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
-
-        <div>Password</div>
-        <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-
-        <div>Admin:</div>
-        <input type="text" class="form-control" placeholder="Admin rights" ng-model="user.admin">
-
-        <div>Location</div>
-        <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
-        <button ng-click="actionPost()">Enter</button>
-    </div>
-
-    <!----------------------------------- searching for user by ID ----------------------------------->
-    <div ng-if="enter === 'ID'">
-        <div>Enter user ID:</div>
-        <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
-        <button ng-click="actionID()">Enter</button>
-        <div>{{userID}}</div>
-    </div>
-
-    <!------------------------------------ editing user -------------------------------------------->
-    <div ng-if="enter === 'PUT'">
-        <div>Enter user ID:</div>
-        <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
-        <button ng-click="allInOne()">Enter</button>
-        <div ng-show="showInput==true">
-            <!--<input  ng-repeat="(key,value) in userID track by $index" type="text" class="form-control" placeholder={{value}} ng-model="userID[key]">-->
-            <span>Name:</span>
-            <input type="text" class="form-control" placeholder={{userID.name}} ng-model="userID.name">
-
-            <span>Username:</span>
-            <input type="text" class="form-control" placeholder={{userID.username}} ng-model="userID.username">
-
-            <span>Password:</span>
-            <input type="text" class="form-control" placeholder={{userID.password}} ng-model="userID.password">
-
-            <span>Admin:</span>
-            <input type="text" class="form-control" placeholder={{userID.admin}} ng-model="userID.admin">
-
-            <span>Location:</span>
-            <input type="text" class="form-control" placeholder={{userID.location}} ng-model="userID.location">
-
-            <button ng-click="saveUser()">Save</button>
-        </div>
-    </div>
-
-    <!--------------------------------------- deleting user ----------------------------------------------->
-    <div ng-if="enter === 'DELETE'">
-        <div>Enter user ID:</div>
-        <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
-        <button ng-click="allInOne()">Enter</button>
-        <div ng-show="showInput==true">
-            <!--<input  ng-repeat="(key,value) in userID track by $index" type="text" class="form-control" placeholder={{value}} ng-model="userID[key]">-->
-            <span>Name:</span>
-            <input type="text" class="form-control" placeholder={{userID.name}} ng-model="userID.name">
-
-            <span>Username:</span>
-            <input type="text" class="form-control" placeholder={{userID.username}} ng-model="userID.username">
-
-            <span>Password:</span>
-            <input type="text" class="form-control" placeholder={{userID.password}} ng-model="userID.password">
-
-            <span>Admin:</span>
-            <input type="text" class="form-control" placeholder={{userID.admin}} ng-model="userID.admin">
-
-            <span>Location:</span>
-            <input type="text" class="form-control" placeholder={{userID.location}} ng-model="userID.location">
-
-            <div>Are you sure you want to delete this user?</div>
-            <button ng-click="deleteUser()">Delete</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button ng-click="deleteUser()" type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                    <button ng-click="saveUser()" type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
