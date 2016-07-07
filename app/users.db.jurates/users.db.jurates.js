@@ -1,23 +1,8 @@
-angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', '$uibModal', '$log',
+    function ($scope, $http, $cookies, $uibModal, $log) {
     $scope.user = {};
 
     $scope.showInput = false;
-
-    // --------------------------------------- authentication --------------------------
-   /* $scope.authentication = function () {
-        $http({
-            method: 'POST',
-            url: 'http://localhost:9001/api/authenticate',
-            data: {
-                username: $scope.username,
-                password: $scope.password
-            }
-        }).success(function (response) {
-            $scope.userInfo = response;
-            $scope.token = response.token;
-            console.log($scope.userInfo);
-        });
-    };*/
 
     // ------------------------------- GETing all users -----------------------------------
     $scope.actionGet = function () {
@@ -106,6 +91,21 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
 
 
     //------------------------------------- modals -----------------------------------------
+    $scope.items = ['item1', 'item2', 'item3'];
 
-}]);
+        $scope.showInfo = function () {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users.db.jurates/modals/modals.users.db.html',
+                controller: 'usersDBModal',
+                size: 'sm',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+        };
+    }]);
 

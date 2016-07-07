@@ -14,7 +14,10 @@ angular.module('myApp.login.jurates', ['ngRoute']).controller('loginJuratesCtrl'
             //$scope.token = response.token;
             console.log($scope.userInfo);
             addTokenToCookie(response.token);
-            $location.path('/usersDB')
+            if(response.token){
+                $location.path('/usersDB')
+            }
+
         });
     };
 

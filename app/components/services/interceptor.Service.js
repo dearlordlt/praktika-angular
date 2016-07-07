@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('interceptorService', ['$q', '$injector', function ($q, $injector) {
+angular.module('myApp').factory('interceptorService', ['$q', '$injector', '$location', 'errorService', function ($q, $injector, $location, errorService) {
 
     var interceptorService = {
         responseError : function (response) {
@@ -12,7 +12,10 @@ angular.module('myApp').factory('interceptorService', ['$q', '$injector', functi
 
             else if(response.status === 403) {
                 console.log('Unauthorised', response);
-                $location.path('/login');
+                $location.path('/login.jurates');
+            }
+            else if(response.status === 500) {
+                errorService.errors = 500;
             }
 
             return $q.reject(response);
