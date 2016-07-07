@@ -8,8 +8,13 @@ angular.module('myApp', [
     'myApp.view2',
     'myApp.view3',
     'myApp.view5',
-    'myApp.view4'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    'myApp.view4',
+    'ngCookies'
+]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+
+
+    $httpProvider.interceptors.push('interceptorService');
+
     $locationProvider.hashPrefix('!');
 
     $routeProvider.when('/view1', {
