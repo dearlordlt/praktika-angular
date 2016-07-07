@@ -10,16 +10,17 @@ angular.module('myApp', [
     'myApp.view5',
     'myApp.view4',
     'ngCookies',
-    'myApp.DatabaseTestThing'
-]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+    'myApp.DatabaseTestThing',
+    'myApp.usersDB',
+    'myApp.login.jurates'
+
+]).config(['$locationProvider', '$routeProvider','$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+    $locationProvider.hashPrefix('!');
 
 
     $httpProvider.interceptors.push('interceptorService');
 
-    'myApp.view4',
-    'myApp.usersDB'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
+
 
     $routeProvider.when('/view1', {
         templateUrl: 'view1/view1.html',
@@ -42,6 +43,9 @@ angular.module('myApp', [
     }).when('/usersDB', {
         templateUrl: 'users.db.jurates/users.db.jurates.html',
         controller: 'usersDBCtrl'
+    }).when('/login.jurates', {
+        templateUrl: 'login.jurates/login.jurates.html',
+        controller: 'loginJuratesCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});
