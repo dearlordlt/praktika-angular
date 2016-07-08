@@ -1,7 +1,13 @@
+<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+        <div ng-transclude></div>
+    </div>
+</script>
+
 <div class="modal-content">
 
     <div class="modal-header">
-        <h3 class="modal-title">I'm a modal!</h3>
+        <h3 class="modal-title">Add user</h3>
     </div>
     <div class="modal-body">
 
@@ -21,6 +27,7 @@
                     <div>Location</div>
                     <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
         </pre>
+
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="actionPost()">Add user</button>

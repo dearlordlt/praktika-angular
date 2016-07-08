@@ -14,9 +14,7 @@ angular.module('myApp').factory('interceptorService', ['$q', '$injector', '$loca
                 console.log('Unauthorised', response);
                 $location.path('/login.jurates');
             }
-            else if(response.status === 500) {
-                errorService.errors = 500;
-            }
+
 
             return $q.reject(response);
         }

@@ -1,8 +1,12 @@
-angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', '$uibModal', '$log',
-    function ($scope, $http, $cookies, $uibModal, $log) {
+angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', '$uibModal', '$log', 'alertsService',
+    function ($scope, $http, $cookies, $uibModal, $log, alertsService) {
         $scope.user = {};
 
         $scope.showInput = false;
+
+        $scope.successAlert = alertsService.alerts.successfulAuthentication.type;
+        $scope.successAlertText = alertsService.alerts.successfulAuthentication.msg;
+
 
         // ------------------------------- GETing all users -----------------------------------
         $scope.actionGet = function () {
@@ -37,7 +41,7 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
                 animation: true,
                 templateUrl: 'users.db.jurates/modals/modals.users.db2.html',
                 controller: 'usersDBModal',
-                size: 'sm',
+                size: 'lg',
                 resolve: {
                     items: function () {
                         return $scope.items;
@@ -53,13 +57,15 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
                 $scope.userID = response;
                 console.log($scope.userID);
                 $scope.actionIDModal();
-            });
+            }).error(function(response){
+                alert('Please enter users ID before continuing');
+            })
 
         };
 
         $scope.actionIDModal = function () {
             $scope.items = $scope.userID;
-            $scope.items.id = $scope.user.id;
+
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'users.db.jurates/modals/modals.users.db3.html',
@@ -68,35 +74,10 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
                 resolve: {
                     items: function () {
                         return $scope.items;
-
-
-
                     }
                 }
             });
         };
-
-
-
-
-        //--------------------------------------- alerts ---------------------------------------------
-        $scope.alerts = {
-            successfulAuthentication: {
-                type: 'success',
-                msg: 'Authentication successful! Please continue'
-            },
-            failedAuthentication: {
-                type: 'danger',
-                msg: 'Authentication failed. Please try again'
-            }
-        };
-
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
-        };
-
-
-        //------------------------------------- modals -----------------------------------------
 
 
     }]);

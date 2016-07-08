@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '$uibModalInstance', '$http', '$cookies',
-    function ($scope, items, $uibModalInstance, $http, $cookies) {
+angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '$uibModalInstance', '$http', '$cookies', 'alertsService',
+    function ($scope, items, $uibModalInstance, $http, $cookies, alertsService) {
 
         $scope.items = items;
 
@@ -23,8 +23,11 @@ angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '
             }).success(function (response) {
                 $scope.addedUser = response;
                 console.log($scope.addedUser);
-            }).error(function (error) {
-                alert(error);
+
+            }).error (function (response){
+
+                alert('Please enter information before continuing')
+
             });
 
         };
@@ -35,7 +38,7 @@ angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '
             }*/
             $http({
                 method: 'PUT',
-                url: 'http://localhost:9001/api/users/' + $scope.items.id + '/?token=' + $cookies.get('login.token'),
+                url: 'http://localhost:9001/api/users/' + $scope.items._id + '/?token=' + $cookies.get('login.token'),
                 data: {
                     name: $scope.items.name,
                     username: $scope.items.username,
@@ -46,13 +49,19 @@ angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '
             }).success(function (response) {
                 $scope.save = response;
                 console.log($scope.save);
-            });
+                alert('Users information changed successfully!')
+            }).error(function (response){
+                alert('Error! Please try again');
+            })
         };
 
         $scope.deleteUser = function () {
-            $http.delete('http://localhost:9001/api/users/' + $scope.items.id + '/?token=' + $cookies.get('login.token')).success(function (response) {
+            $http.delete('http://localhost:9001/api/users/' + $scope.items._id + '/?token=' + $cookies.get('login.token')).success(function (response) {
                 $scope.deletedUser = response;
-            });
+                alert('User delete successfully');
+            }).error (function(response){
+                alert('Error! Please try again');
+            })
         };
 
 
