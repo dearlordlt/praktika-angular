@@ -15,7 +15,8 @@ angular.module('myApp', [
     'myApp.CoolLoginPage',
     'myApp.DatabaseTestThing',
     'myApp.view4',
-    'myApp.usersDB'
+    'myApp.usersDB',
+    'myApp.login.jurates'
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
 
 
