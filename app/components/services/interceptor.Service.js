@@ -12,6 +12,7 @@ angular.module('myApp').factory('interceptorService', ['$q', '$injector','$locat
 
             else if(response.status === 403) {
                 console.log('Unauthorised', response);
+                alert('You do not have access to the operation, please login');
                 $location.path('/CoolLoginPage');
             }
             else if(response.status === 304) {
@@ -20,7 +21,7 @@ angular.module('myApp').factory('interceptorService', ['$q', '$injector','$locat
             }
             else if(response.status === 500) {
                 console.log('Missing data', response);
-                var errorMessage = 'Missing data, please fill in the required fields';
+                var errorMessage = '( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ clickty clack clickty clack with this chant I summon a 500 error to the chat';
                 errorPrintingService.error = errorMessage;
             }
 

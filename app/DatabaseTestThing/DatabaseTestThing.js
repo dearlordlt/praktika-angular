@@ -2,7 +2,7 @@
  * Created by Ausra Faturova on 04/07/2016.
  */
 angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestCtrl', ['$scope','$http', '$cookies','errorPrintingService','$uibModal', function ($scope,$http,$cookies,errorPrintingService,$uibModal) {
-    //~~~~~~~~~~~~~~~~~~~~~~~~User object creation~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~Initial variable creation~~~~~~~~~~~~~~~~~~~~~~
     $scope.user = {
 
     };
@@ -32,7 +32,7 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
             $scope.clickChecker=!$scope.clickChecker;
         }
     };
-    $scope.createUser = function(){
+    /*$scope.createUser = function(){
         $http({
             method: 'POST',
             url: 'http://localhost:9001/api/users/?token='+ $cookies.get('cool_token'),
@@ -59,7 +59,7 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
 
         })
 
-    };
+    };*/
     $scope.getUserById = function(){
         $http({
             method: 'GET',
@@ -120,5 +120,28 @@ angular.module('myApp.DatabaseTestThing', ['ngRoute']).controller('DatabaseTestC
                 }
             }
         })};
+    $scope.dynamicPopover = {
+        content: 'Hello, World!',
+        templateUrl: 'myPopoverTemplate.html',
+        title: 'Title'
+    };
+
+    $scope.placement = {
+        options: [
+            'top',
+            'top-left',
+            'top-right',
+            'bottom',
+            'bottom-left',
+            'bottom-right',
+            'left',
+            'left-top',
+            'left-bottom',
+            'right',
+            'right-top',
+            'right-bottom'
+        ],
+        selected: 'top'
+    };
 
         }]);
