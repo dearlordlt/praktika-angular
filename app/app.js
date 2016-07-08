@@ -10,14 +10,12 @@ angular.module('myApp', [
     'myApp.view5',
     'myApp.view4',
     'ngCookies',
-    'myApp.DatabaseTestThing'
-]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
-
-
-    $httpProvider.interceptors.push('interceptorService');
-
+    'myApp.DatabaseTestThing',
     'myApp.view4',
     'myApp.usersDB'
+]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+    $httpProvider.interceptors.push('interceptorService');
+}
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 

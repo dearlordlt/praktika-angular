@@ -1,14 +1,26 @@
 <p>This is the partial for view 1. Hello world</p>
 
-<hr />
+<hr/>
 
 <div ng-if="userList">
-    <input type="text" class="form-control" placeholder="filter users" ng-model="myFilter" />
+    <input type="text" class="form-control" placeholder="filter users" ng-model="myFilter"/>
     <ul>
         <li ng-repeat="user in userList.users | filter:{name : myFilter} | indexFilter:1 track by $index">
-            {{user.index}} <a ng-click="showInfo($index)">Name</a>: {{user.name | toUpperCase}} Email: <a href="mailto:{{user.email}}">{{user.email}}</a> Cash {{user.cash | cashFilter}}
+            {{user.index}} <a ng-click="showInfo($index)">Name</a>: {{user.name | toUpperCase}} Email: <a
+                href="mailto:{{user.email}}">{{user.email}}</a> Cash {{user.cash | cashFilter}}
         </li>
     </ul>
 </div>
 
 <div ng-if="!userList">Loading ...</div>
+
+<div>
+    <p>Input:</p>
+    <input element-drv class="form-control"
+           type="text"
+           placeholder="meh"
+           name="q"
+           id="q"
+           autocomplete="off"
+           ng-model="myCustomInputDrv"/>
+</div>
