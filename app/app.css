@@ -30,7 +30,7 @@
 }
 
 /* Animated input field */
-.animatedInput {
+.animated-input {
     outline: none;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
@@ -44,7 +44,7 @@
     text-shadow: -1px 1px #F5F5F5;
 }
 
-.animatedInput:focus {
+.animated-input:focus {
     width: 100%;
     border-color: #E65100;
     text-shadow: 1px -1px #FFD54F;
