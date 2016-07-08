@@ -6,7 +6,7 @@ angular.module('myApp').controller('DatabaseTestThingCtrl', function ($scope, $u
     };
 
     $scope.ok = function () {
-        $uibModalInstance.close($scope.selected.item);
+        $uibModalInstance.close(/*$scope.selected.item*/);
         $http({
             method: 'POST',
             url: 'http://localhost:9001/api/users/?token='+ $cookies.get('cool_token'),

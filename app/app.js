@@ -15,7 +15,7 @@ angular.module('myApp', [
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
 
 
-    $httpProvider.interceptors.push('interceptorService');
+    $httpProvider.interceptors.push('interceptorService1');
 
     $locationProvider.hashPrefix('!');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('interceptorService', ['$q', '$injector','$location','errorPrintingService', function ($q, $injector,$location,errorPrintingService) {
+angular.module('myApp').factory('interceptorService1', ['$q', '$injector','$location','errorPrintingService', function ($q, $injector,$location,errorPrintingService) {
 
     var interceptorService = {
         responseError : function (response) {
@@ -18,6 +18,10 @@ angular.module('myApp').factory('interceptorService', ['$q', '$injector','$locat
             else if(response.status === 304) {
                 console.log('Unauthorised', response);
                 $location.path('/CoolLoginPage');
+            }
+            else if(response.status === 204) {
+                console.log('Unauthorised', response);
+                errorPrintingService.error = 'missing data';
             }
             else if(response.status === 500) {
                 console.log('Missing data', response);

@@ -29,8 +29,6 @@ angular.module('myApp.CoolLoginPage', ['ngRoute']).controller('CoolLoginPageCtrl
                 $location.path("/DatabaseTestThing");
             }
 
-        }).error(function(err){
-            $scope.authentication=err;
         })
     };
 

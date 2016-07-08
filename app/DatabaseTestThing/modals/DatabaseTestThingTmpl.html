@@ -2,15 +2,16 @@
     <h3 class="modal-title">User creation</h3>
 </div>
 <div class="modal-body">
+
     <ul>
-        Name:<input type="text" class="form-control" ng-model="user.name" placeholder="Desired Name"/>
-        Username:<input type="text" class="form-control" ng-model="user.username" placeholder="Desired Username"/>
-        Password:<input type="password" class="form-control" ng-model="user.password" placeholder="Desired Password"/>
-        Admin:<select name="singleSelect" ng-model="user.admin">
+        <span>Name:</span><input type="text" class="form-control" ng-model="user.name" placeholder="Desired Name"/>
+        <span> Username:</span><input type="text" class="form-control" ng-model="user.username" placeholder="Desired Username"/>
+        <span>Password:</span><input type="password" class="form-control" ng-model="user.password" placeholder="Desired Password"/>
+        <span></span>Admin:</span><select name="singleSelect" ng-model="user.admin">
             <option value="true">YES I AM!!!!</option>
             <option value="false">Totally!(Not really, actually no...)</option>
         </select>
-       Location: <input type="text" class="form-control" ng-model="user.location" placeholder="Desired Location"/>
+       <span> Location:</span><input type="text" class="form-control" ng-model="user.location" placeholder="Desired Location"/>
     </ul>
 </div>
 <div class="modal-footer">
