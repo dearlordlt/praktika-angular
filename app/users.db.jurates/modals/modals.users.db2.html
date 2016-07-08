@@ -1,0 +1,31 @@
+<div class="modal-content">
+
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+
+        <pre>
+                <div>Name:</div>
+                    <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
+
+                    <div>Username:</div>
+                    <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
+
+                    <div>Password</div>
+                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+
+                    <div>Admin:</div>
+                    <input type="text" class="form-control" placeholder="Admin rights" ng-model="user.admin">
+
+                    <div>Location</div>
+                    <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
+        </pre>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="actionPost()">Add user</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+
+
+</div>
