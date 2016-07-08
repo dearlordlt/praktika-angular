@@ -11,9 +11,15 @@ angular.module('myApp', [
     'myApp.view4',
     'ngCookies',
     'myApp.DatabaseTestThing',
+    'myApp.CoolLoginPage'
+    'myApp.DatabaseTestThing',
     'myApp.view4',
     'myApp.usersDB'
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+
+
+    $httpProvider.interceptors.push('interceptorService1');
+
     $httpProvider.interceptors.push('interceptorService');
 }
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
@@ -37,6 +43,9 @@ angular.module('myApp', [
     }).when('/DatabaseTestThing', {
         templateUrl: 'DatabaseTestThing/DatabaseTestThing.html',
         controller: 'DatabaseTestCtrl'
+    }).when('/CoolLoginPage', {
+        templateUrl: 'LoginPage/CoolLoginPage.html',
+        controller: 'CoolLoginPageCtrl'
     }).when('/usersDB', {
         templateUrl: 'users.db.jurates/users.db.jurates.html',
         controller: 'usersDBCtrl'
