@@ -11,7 +11,8 @@ angular.module('myApp', [
     'myApp.view4',
     'ngCookies',
     'myApp.DatabaseTestThing',
-    'myApp.CoolLoginPage'
+    'myApp.CoolLoginPage',
+    'myApp.CoolLoginPage',
     'myApp.DatabaseTestThing',
     'myApp.view4',
     'myApp.usersDB'
