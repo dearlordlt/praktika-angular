@@ -40,6 +40,9 @@ angular.module('myApp', [
     }).when('/usersDB', {
         templateUrl: 'users.db.jurates/users.db.jurates.html',
         controller: 'usersDBCtrl'
+    }).when('/login.jurates', {
+        templateUrl: 'login.jurates/login.jurates.html',
+        controller: 'loginJuratesCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});

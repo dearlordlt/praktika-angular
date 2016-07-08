@@ -11,127 +11,24 @@
 </head>
 
 <body>
-<h1>Good day!</h1>
-
-<p>Please login before executing further actions:</p>
-
-<!----------------------------------- authentication ---------------------------------------->
-<div class="form-group">
-    <input type="text" class="form-control" placeholder="Enter your username" ng-model="username">
-    <input type="password" class="form-control" placeholder="Enter your password" ng-model="password">
-    <button ng-click="authentication()">Login</button>
-</div>
-
 <!--------------------------------------- alerts -------------------------------------------->
-<div ng-if="userInfo.success === false">
-    <uib-alert type="{{alerts.failedAuthentication.type}}" close="close = true" ng-show="!close">
-        {{alerts.failedAuthentication.msg}}
-    </uib-alert>
-</div>
 
-<div ng-if="userInfo.success === true">
 
-    <uib-alert type="{{alerts.successfulAuthentication.type}}" close="close = true" ng-show="!close">
-        {{alerts.successfulAuthentication.msg}}
+    <uib-alert type="{{successAlert}}" close="close = true" ng-show="!close">
+        {{successAlertText}}
     </uib-alert>
 
+<button ng-click="actionGet()">Users list</button>
+<button ng-click="actionPostModal()">Add user</button>
+<button ng-click="actionID()">Search</button>
 
-    <!---------------------------------- modals ----------------------------------------->
-
-    <!----------------------------------- User list ------------------------------------>
-
-    <button ng-click="actionGet()" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-            data-target="#userListModal">User list
-    </button>
-
-    <div class="modal fade" id="userListModal" tabindex="-1" role="dialog" aria-labelledby="userListModalTitle">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userListModalTitle">User list</h4>
-                </div>
-                <pre class="modal-body">
-                    {{allUsers | json}}
-                </pre>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--------------------------------------------Add user ----------------------------------------->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal">Add
-        user
-    </button>
-
-    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalTitle">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addedUserModalTitle">Add user</h4>
-                </div>
-                <div class="modal-body">
-                    <div>Name:</div>
-                    <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
-
-                    <div>Username:</div>
-                    <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
-
-                    <div>Password</div>
-                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-
-                    <div>Admin:</div>
-                    <input type="text" class="form-control" placeholder="Admin rights" ng-model="user.admin">
-
-                    <div>Location</div>
-                    <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button ng-click="actionPost()" type="button" class="btn btn-primary" data-dismiss="modal">Add user</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!----------------------------------------- search by ID ------------------------------------------>
-    <div>Enter user ID:</div>
+     <div>Enter user ID:</div>
     <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
 
-    <!--<button ng-click="actionID()">Enter</button>
-    <pre>{{userID | json}}</pre>
--->
-    <button ng-click="actionID()" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-            data-target="#searchByIdModal">Search
-    </button>
 
-    <div class="modal fade" id="searchByIdModal" tabindex="-1" role="dialog" aria-labelledby="searchByIdModalTitle">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="searchByIdModalTitle">User {{userID.name}}</h4>
-                </div>
-                <div class="modal-body">
-                   <div>
-                        <input  ng-repeat="(key,value) in userID" type="text" class="form-control" placeholder={{value}} ng-model="userID[key]">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button ng-click="deleteUser()" type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
-                    <button ng-click="saveUser()" type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+
+
+<!--</div>-->
 </body>
 
