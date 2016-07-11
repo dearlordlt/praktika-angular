@@ -11,20 +11,25 @@
 </head>
 
 <body>
-<!--------------------------------------- alerts -------------------------------------------->
+
+<div style="font-style: italic; font-family: cursive; text-align: center; font-size: 50px">
+Welcome !!
+</div>
 
 
     <uib-alert type="{{successAlert}}" close="close = true" ng-show="!close">
         {{successAlertText}}
     </uib-alert>
 
-<button ng-click="actionGet()">Users list</button>
-<button ng-click="actionPostModal()">Add user</button>
-<button ng-click="actionID()">Search</button>
 
-     <div>Enter user ID:</div>
-    <input type="text" class="form-control" placeholder="ID" ng-model="user.id">
+<button class="select-button" ng-click="actionGet()">Users list</button>
+<button class="select-button" ng-click="actionPostModal()">Add user</button>
 
+
+
+     <div style="margin-top: 20px">Enter user ID:</div>
+    <input type="text" class="form-control" placeholder="ID" ng-model="user.id" style="width:300px" >
+<button class="select-button" ng-click="actionID()">Search</button>
 
     </div>
 
