@@ -7,17 +7,19 @@
         </div>
     </script>
 </head>
-<body>
-<h1>Good day!</h1>
+<body style="background-image:url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRgdlWvqZIB0r6qkjFS_t9uMKD9gQIVMV3fE-Vw9BMoRfNEmJG2)">
+<h1><img src="http://www.hotel-r.net/im/hotel/fr/hello-1.jpg" alt="Hello" style="width:200px; height: 100px; margin-left: 40%"> </h1>
 
-<p>Please login before executing further actions:</p>
+<p style="margin-left: 40%">Please login before executing further actions:</p>
 
 <!----------------------------------- authentication ---------------------------------------->
-<div class="form-group">
+<div class="form-group, input-width">
+
     <input type="text" class="form-control" placeholder="Enter your username" ng-model="username">
     <input type="password" class="form-control" placeholder="Enter your password" ng-model="password">
-    <button ng-click="authentication()">Login</button>
 </div>
+
+    <button class="confirm-button" ng-click="authentication()" >Login</button>
 
 <div ng-if="userInfo.success === false">
     <uib-alert type="{{failureAlert}}" close="close = true" ng-show="!close">

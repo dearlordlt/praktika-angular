@@ -4,6 +4,10 @@
     </div>
 </script>
 
+
+
+
+
 <div class="modal-content">
 
     <div class="modal-header">
@@ -24,6 +28,14 @@
                     <div>Admin:</div>
                     <input type="text" class="form-control" placeholder="Admin rights" ng-model="user.admin">
 
+            <form name="admin-rights">
+                <label>Yes:<input type="checkbox" ng-model="checkboxModel.adminTrues">
+                </label><br/>
+                <label>No:<input type="checkbox" ng-model="checkboxModel.adminFalse">
+                </label><br/>
+            </form>
+
+
                     <div>Location</div>
                     <input type="text" class="form-control" placeholder="Location" ng-model="user.location">
         </pre>
@@ -35,7 +47,5 @@
     </div>
 
 
-<<<<<<< Updated upstream
 </div>
-=======
->>>>>>> Stashed changes
+
