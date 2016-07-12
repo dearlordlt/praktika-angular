@@ -22,18 +22,38 @@ angular.module('myApp.BiscuitClicker', []).controller('BiscuitClickerCtrl', ['$s
                     case 5:
                         $scope.price = (1.05 ^ $scope.adder5Amount) * initPrice;
                         $scope.adder5Amount += 1;
+                        add = $interval(function () {
+                                $scope.biscuitAmount += amount*multiplicator;
+                                return $scope.biscuitAmount;
+                            }
+                            , 1000);
                         break;
                     case 25:
                         $scope.price = (1.05 ^ $scope.adder25Amount) * initPrice;
                         $scope.adder25Amount += 1;
+                        add = $interval(function () {
+                                $scope.biscuitAmount += amount*multiplicator;
+                                return $scope.biscuitAmount;
+                            }
+                            , 1000);
                         break;
                     case 100:
                         $scope.price = (1.05 ^ $scope.adder100Amount) * initPrice;
                         $scope.adder100Amount += 1;
+                        add = $interval(function () {
+                                $scope.biscuitAmount += amount*multiplicator;
+                                return $scope.biscuitAmount;
+                            }
+                            , 1000);
                         break;
                     case 500:
                         $scope.price = (1.05 ^ $scope.adder500Amount) * initPrice;
                         $scope.adder500Amount += 1;
+                        add = $interval(function () {
+                                $scope.biscuitAmount += amount*multiplicator;
+                                return $scope.biscuitAmount;
+                            }
+                            , 1000);
                         break;
                 }
             };
@@ -41,13 +61,16 @@ angular.module('myApp.BiscuitClicker', []).controller('BiscuitClickerCtrl', ['$s
                 $scope.typeChecker();
                 $scope.biscuitAmount = $scope.biscuitAmount - $scope.price;
 
-                    add = $interval(function () {
-                        $scope.biscuitAmount += amount*multiplicator;
-                        return $scope.biscuitAmount;
-                    }
-                    , 1000);
+
 
             }
+        };
+        $scope.biscuitUpgrade = function(){
+            $scope.multiplicator = 1;
+            $scope.multiplicator=biscuitMultiplicatorService.multiplicator;
+            ;
+
+
         };
         /*function biscuitAdderObj (type, price, addingPower, multiplicator){
             this.type = type;
