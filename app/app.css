@@ -52,6 +52,7 @@
     color: #E0E0E0;
     background-color: #FF9800;
 }
+<<<<<<< HEAD
 .hvr-grow {
     display: inline-block;
     vertical-align: middle;
@@ -69,4 +70,37 @@
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+=======
+
+/* ------------------------------------------- input width ---------------------------------- */
+
+.input-width {
+    width: 25%;
+    margin-left: 40%;
+    background-color: rgba(255,255,255,1)
+}
+
+.confirm-button {
+    margin-left: 40%;
+    margin-top: 10px;
+    background-color: #5bc0de;
+    border-color: transparent;
+    border-radius: 12px;
+}
+
+.select-button {
+
+    margin-top: 10px;
+    background-color: #5bc0de;
+    border-color: transparent;
+    border-radius: 12px;
+    width: 100px;
+    display: inline-block;
+
+}
+
+
+body{
+    background-image: url(http://www.planwallpaper.com/static/images/744081-background-wallpaper.jpg);
+>>>>>>> c9750352a17441400df34dfb13d21d1725b78380
 }

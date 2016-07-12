@@ -64,5 +64,9 @@ angular.module('myApp.usersDB').controller('usersDBModal', ['$scope', 'items', '
             })
         };
 
+            $scope.checkboxModel = {
+                    adminTrue: false ,
+                    adminFalse: false
+                };
 
     }]);
