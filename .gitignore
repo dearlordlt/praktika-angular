@@ -9,3 +9,5 @@ tmp
 /app/bower_components/
 /server_app/db/
 /db/
+/npm-debug.log
+/npm-debug.log.2810379006
