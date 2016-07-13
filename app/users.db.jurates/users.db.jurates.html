@@ -6,7 +6,11 @@
         </div>
     </script>
 
-
+    <style type="text/css">
+        form.tab-form-demo .tab-pane {
+            margin: 20px 20px;
+        }
+    </style>
 
 </head>
 
@@ -22,16 +26,27 @@ Welcome !!
     </uib-alert>
 
 
-<button class="select-button" ng-click="actionGet()">Users list</button>
-<button class="select-button" ng-click="actionPostModal()">Add user</button>
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Actions with users">
+            <button class="select-button" ng-click="actionGet()">Users list</button>
+            <button class="select-button" ng-click="actionPostModal()">Add user</button>
 
 
 
-     <div style="margin-top: 20px">Enter user ID:</div>
-    <input type="text" class="form-control" placeholder="ID" ng-model="user.id" style="width:300px" >
-<button class="select-button" ng-click="actionID()">Search</button>
+            <div style="margin-top: 20px">Enter user ID:</div>
+            <input type="text" class="form-control" placeholder="ID" ng-model="user.id" style="width:300px" >
+            <button class="select-button" ng-click="actionID()">Search</button>
 
-    </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Art section">
+            <canvas-test></canvas-test>
+            <button class="select-button" ng-click="moveLeft()">Left</button>
+            <button class="select-button" ng-click="moveRight()">Right</button>
+        </uib-tab>
+    </uib-tabset>
+
+
 
 
 <!--</div>-->
