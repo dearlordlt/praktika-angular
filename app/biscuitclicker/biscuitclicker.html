@@ -5,16 +5,26 @@
     <title>Biscuit clicker</title>
 </head>
 <body>
+
+<div class="thumb1">
+    <div>
+        <h1>Kappa Clicker</h1>
+    </div>
+</div>
     <div class="Cookie shower">
-        <span>{{biscuitAmount}}</span>
+        <span> KAPPA COUNT : {{biscuitAmount}}</span>
     </div>
 <div class="buttons">
-    <button ng-click="biscuitClick()">Add 1 biscuits</button>
-    <button ng-click="biscuitAdder(5, 5, 5)">Add 5 biscuits</button>
-    <button ng-click="biscuitAdder(25, 25, 25)">Add 25 biscuits</button>
-    <button ng-click="biscuitAdder(100, 100, 100)">Add 100 biscuits</button>
-    <button ng-click="biscuitAdder(500, 500, 500)">Add 500 biscuits</button>
-    <button ng-click="biscuitAdder(1000, 1000)">Add 1000 biscuits</button>
+    <button ng-click="biscuitClick()">Add 1 Kappa</button>
+    <button ng-click="biscuitAdder(5, 5, 5, 1)">Add 5 Kappas per sec</button>
+    <button ng-click="biscuitAdder(25, 25, 25, 1)">Add 25 Kappas per sec</button>
+    <button ng-click="biscuitAdder(100, 100, 100, 1)">Add 100 Kappas per sec</button>
+    <button ng-click="biscuitAdder(500, 500, 500, 1)">Add 500 Kappas per sec</button>
+    <button ng-click="biscuitAdder(1000, 1000)">Add 1000 Kappas</button>
+</div>
+<div>
+    <biscuitcanvas-drv kappa="{{biscuitAmount}}"></biscuitcanvas-drv>
+
 </div>
 </body>
 </html>

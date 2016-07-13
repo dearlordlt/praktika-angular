@@ -16,7 +16,8 @@ angular.module('myApp', [
     'myApp.DatabaseTestThing',
     'myApp.view4',
     'myApp.usersDB',
-    'myApp.login.jurates'
+    'myApp.login.jurates',
+    'myApp.BiscuitClicker'
 ]).config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
 
 
@@ -54,6 +55,9 @@ angular.module('myApp', [
     }).when('/login.jurates', {
         templateUrl: 'login.jurates/login.jurates.html',
         controller: 'loginJuratesCtrl'
+    }).when('/BiscuitClicker', {
+        templateUrl: 'biscuitclicker/biscuitclicker.html',
+        controller: 'BiscuitClickerCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/view1'});
