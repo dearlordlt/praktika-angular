@@ -6,10 +6,10 @@ angular.module('myApp').directive('biscuitcanvasDrv', ['$timeout','$interval', f
         var canvas = $("#testCanvas");
         var paper = Raphael("testCanvas", 500, 500);
 
-        var ssss = false;
+        var gamechecker = false;
 
 var GameBegin = function(){
-    ssss=false;
+    gamechecker=false;
     //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Initial variables¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
     var KappaClaus = paper.image('https://d1b2zzpxewkr9z.cloudfront.net/user_images/8445445cfca1fda805669ae04feb9c82a9f8809b/687474703a2f2f7477697463682e7770656e67696e652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f31312f537469636b65725f53616e74614b617070612e706e67', 10, 10, 55,65);
     var Kappas =[];
@@ -62,29 +62,70 @@ var GameBegin = function(){
         }
         else return false;
     }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Levels~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~level 2~~~~~~~~~~~~~~~~
+    scope.level2 = $timeout(function (){
+        $interval.cancel(KappaSpawn); //cancel level 1
+        scope.KappaSpawn2 = $interval(function () {
+            var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
+            Kappas.push(Kappa);
+            angular.forEach(Kappas, function(value, key) {
+                Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 3000);
+            })
+        },400);
 
+    }, 6000);
+    //~~~~~~~~~~~level 3~~~~~~~~~~~~~~~~
+    scope.level3 = $timeout(function (){
+        $interval.cancel(scope.KappaSpawn2); //cancel level 2
+        scope.KappaSpawn3 = $interval(function () {
+            var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
+            Kappas.push(Kappa);
+            angular.forEach(Kappas, function(value, key) {
+                Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 1500);
+            })
+        },200);
+
+    }, 9000);
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End game function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     var collide = $interval( function() {
         angular.forEach(Kappas, function(value, key) {
             if( collision(  Kappas[key].attr('x'),  Kappas[key].attr('y'),  KappaClaus.attr('x'), KappaClaus.attr('y') )) {
                 var gameEnd = function(){
                     paper.clear();
                     $interval.cancel(KappaSpawn);
+                    $timeout.cancel(scope.level2);
+                    $interval.cancel(scope.KappaSpawn2);
+                    $timeout.cancel(scope.level3);
+                    $interval.cancel(scope.KappaSpawn3);
                     $interval.cancel(collide);
                     Kappas.splice(0,Kappas.length);
-                    ssss = true;
-                    return ssss;
+                    gamechecker = true;
+                    return gamechecker;
                 };
                 gameEnd();
             }
 
         })
     },100 );
+
 };
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Game starter~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         $interval(function(){
-if(ssss===true){
+if(gamechecker===true){
     GameBegin();
 }},100);
+
+
         GameBegin();
+
+
+
+
+
+
       /*  var c = element[0].getContext('2d');
         var img = new Image();
         img.src = 'http://i.imgur.com/W0QgS4N.png';
