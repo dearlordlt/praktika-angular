@@ -1,5 +1,5 @@
-angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', '$uibModal', '$log', 'alertsService',
-    function ($scope, $http, $cookies, $uibModal, $log, alertsService) {
+angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope', '$http', '$cookies', '$uibModal', '$log', 'alertsService', 'pokemonService',
+    function ($scope, $http, $cookies, $uibModal, $log, alertsService, pokemonService) {
         $scope.user = {};
 
         $scope.showInput = false;
@@ -7,6 +7,38 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
         $scope.successAlert = alertsService.alerts.successfulAuthentication.type;
         $scope.successAlertText = alertsService.alerts.successfulAuthentication.msg;
 
+        $scope.countPokemon = 0;
+        $scope.missPokemon = 0;
+        $scope.level = 1;
+
+        $scope.$watch(function(){
+            return pokemonService.counterPokemon}, function(newValue, oldValue){
+                if(newValue !== oldValue) {
+                    $scope.countPokemon = pokemonService.counterPokemon;
+                }
+                console.log($scope.countPokemon);
+        });
+
+        $scope.$watch(function(){
+            return pokemonService.missedPokemon}, function(newValue, oldValue){
+            if(newValue !== oldValue) {
+                $scope.missPokemon = pokemonService.missedPokemon;
+            }
+            console.log($scope.missPokemon);
+        });
+
+        $scope.$watch(function(){
+            return pokemonService.gameLevel}, function(newValue, oldValue){
+            if(newValue !== oldValue) {
+                $scope.level = pokemonService.gameLevel;
+            }
+            console.log($scope.missPokemon);
+        });
+     /* $scope.$watch(function(){
+          return countPokemon;
+      }, function(newValue){
+          $scope.countPokemon = newValue
+      });*/
 
         // ------------------------------- GETing all users -----------------------------------
         $scope.actionGet = function () {
@@ -78,6 +110,9 @@ angular.module('myApp.usersDB', ['ngRoute']).controller('usersDBCtrl', ['$scope'
                 }
             });
         };
+
+
+
 
 
     }]);
