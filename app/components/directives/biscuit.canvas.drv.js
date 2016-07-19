@@ -17,14 +17,14 @@ var GameBegin = function(){
         return Math.floor((Math.random()*300));
     };
     //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Kappa count observer¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
-    attr.$observe('kappa', function () {
+   /* attr.$observe('kappa', function () {
         var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
         Kappas.push(Kappa);
         angular.forEach(Kappas, function(value, key) {
             Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 6000);
         });
         KappaClaus.toFront();
-    });
+    });*/
     //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Drag function¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
     var start = function (){
             this.ox = this.attr("x");
@@ -36,20 +36,7 @@ var GameBegin = function(){
         },
         up = function () {
             this.animate();
-            angular.forEach(Kappas, function(value, key) {
-                Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 6000);
-            });
-
         };
-
-    //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Periodic Kappa spawning function¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
-    var KappaSpawn =$interval(function () {
-        var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
-        Kappas.push(Kappa);
-        angular.forEach(Kappas, function(value, key) {
-            Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 6000);
-        })
-    },500);
 
     //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬ Kappa dragging¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
     KappaClaus.drag(move,start, up);
@@ -63,30 +50,49 @@ var GameBegin = function(){
         else return false;
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Levels~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~~~~~~~level 2~~~~~~~~~~~~~~~~
-    scope.level2 = $timeout(function (){
-        $interval.cancel(KappaSpawn); //cancel level 1
-        scope.KappaSpawn2 = $interval(function () {
-            var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
-            Kappas.push(Kappa);
-            angular.forEach(Kappas, function(value, key) {
-                Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 3000);
-            })
-        },400);
+    //~~~~~~~~~~~~Kappa spawn variables~~~~~~~~~~~
+    var speed = 6000;
+    var gameTime = 0;
 
-    }, 6000);
-    //~~~~~~~~~~~level 3~~~~~~~~~~~~~~~~
-    scope.level3 = $timeout(function (){
-        $interval.cancel(scope.KappaSpawn2); //cancel level 2
-        scope.KappaSpawn3 = $interval(function () {
-            var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
-            Kappas.push(Kappa);
-            angular.forEach(Kappas, function(value, key) {
-                Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 1500);
-            })
-        },200);
+    var KappaSpawner = function(){
+        var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
+        Kappas.push(Kappa);
+    };
+    var KappaAnimater = function(){
+        angular.forEach(Kappas, function(value, key) {
+            Kappas[key].stop();
+            Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, speed);
+            KappaClaus.toFront();
+        });
+    };
+    //~~~~~~~~~~~~Dynamic Kappa spawner~~~~~~~~~~~~~
 
-    }, 9000);
+    var KappaSpawn = $interval(function () {
+        gameTime++;
+        //Kappa spawner
+        if(gameTime%200 === 0 ){
+            KappaSpawner();
+            KappaAnimater();
+        }
+        //speed increase
+        if(gameTime%3000 === 0){
+            speed = speed / 2;
+            KappaSpawner();
+        }
+        //level 2 spawning
+        if(gameTime>3000 && gameTime%100 === 0){
+            KappaSpawner();
+            KappaAnimater();
+        }
+        //level 3 spawning
+        if(gameTime>6000 && gameTime%50 === 0){
+            KappaSpawner();
+            KappaAnimater();
+        }
+
+
+
+    },1);
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End game function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     var collide = $interval( function() {
@@ -95,10 +101,6 @@ var GameBegin = function(){
                 var gameEnd = function(){
                     paper.clear();
                     $interval.cancel(KappaSpawn);
-                    $timeout.cancel(scope.level2);
-                    $interval.cancel(scope.KappaSpawn2);
-                    $timeout.cancel(scope.level3);
-                    $interval.cancel(scope.KappaSpawn3);
                     $interval.cancel(collide);
                     Kappas.splice(0,Kappas.length);
                     gamechecker = true;
@@ -110,6 +112,26 @@ var GameBegin = function(){
         })
     },100 );
 
+
+// Boss Kappa
+    /*var aaa = $timeout(function(){ {
+            $interval.cancel(dynKappaSpawner);
+            $interval.cancel(scope.KappaSpawn);
+            var kappaRoss = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(), 100, 100);
+            var KappaSpawn1 = $interval(function () {
+                var kappaRossMinions = [];
+                var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', kappaRoss.attr('x'), kappaRoss.attr('y'), 50, 50);
+                kappaRossMinions.push(Kappa);
+                angular.forEach(kappaRossMinions, function (value, key) {
+                    kappaRossMinions[key].stop();
+                    kappaRossMinions[key].animate({x: random(), y: random()}, 1000);
+                    var bbb = $timeout(function(){
+                        kappaRossMinions[key].delete();
+                    },4000);
+                })
+
+            }, 200);
+        }},9000)*/
 };
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Game starter~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,7 +141,9 @@ if(gamechecker===true){
 }},100);
 
 
+
         GameBegin();
+
 
 
 
