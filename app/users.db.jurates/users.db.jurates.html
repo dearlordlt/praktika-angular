@@ -40,9 +40,18 @@ Welcome !!
             </div>
         </uib-tab>
         <uib-tab index="1" heading="Art section">
-            <canvas-test></canvas-test>
+            <canvas-test></canvas-test> <br>
             <button class="select-button" ng-click="moveLeft()">Left</button>
             <button class="select-button" ng-click="moveRight()">Right</button>
+            <br>
+            <div> You cought {{countPokemon}} Pokemons!</div>
+            <div> You missed {{missPokemon}} Pokemons...</div>
+            <div> Your level is: {{level}} !</div><raphael-directive></raphael-directive>
+             <br>
+
+
+
+
         </uib-tab>
     </uib-tabset>
 
