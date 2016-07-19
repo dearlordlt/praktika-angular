@@ -1,10 +1,156 @@
 'use strict';
-
-angular.module('myApp').directive('biscuitcanvasDrv', function ($interval) {
+angular.module('myApp').directive('biscuitcanvasDrv', ['$timeout','$interval', function ($timeout, $interval) {
 
     function link(scope, element, attr) {
-        console.info(element);
-        var c = element[0].getContext('2d');
+
+        var canvas = $("#testCanvas");
+        var paper = Raphael("testCanvas", 500, 500);
+
+        var gamechecker = false;
+
+var GameBegin = function(){
+    gamechecker=false;
+    //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Initial variables¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+    var KappaClaus = paper.image('https://d1b2zzpxewkr9z.cloudfront.net/user_images/8445445cfca1fda805669ae04feb9c82a9f8809b/687474703a2f2f7477697463682e7770656e67696e652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f31312f537469636b65725f53616e74614b617070612e706e67', 10, 10, 55,65);
+    var Kappas =[];
+    var random = function(){
+        return Math.floor((Math.random()*300));
+    };
+    //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Kappa count observer¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+   /* attr.$observe('kappa', function () {
+        var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
+        Kappas.push(Kappa);
+        angular.forEach(Kappas, function(value, key) {
+            Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, 6000);
+        });
+        KappaClaus.toFront();
+    });*/
+    //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Drag function¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+    var start = function (){
+            this.ox = this.attr("x");
+            this.oy = this.attr("y");
+
+        },
+        move = function (dx, dy) {
+            this.attr({x: this.ox + dx, y: this.oy + dy});
+        },
+        up = function () {
+            this.animate();
+        };
+
+    //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬ Kappa dragging¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+    KappaClaus.drag(move,start, up);
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Collision checker~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    function collision (k1x, k1y, k2x, k2y) {
+        var HitBox = 20;
+        if((k1x <= k2x + HitBox && k1x >= k2x-HitBox) && (k1y <= k2y+HitBox && k1y >= k2y-HitBox)){
+            return true;
+        }
+        else return false;
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Levels~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~Kappa spawn variables~~~~~~~~~~~
+    var speed = 6000;
+    var gameTime = 0;
+
+    var KappaSpawner = function(){
+        var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
+        Kappas.push(Kappa);
+    };
+    var KappaAnimater = function(){
+        angular.forEach(Kappas, function(value, key) {
+            Kappas[key].stop();
+            Kappas[key].animate({x: KappaClaus.attr("x"), y: KappaClaus.attr("y")}, speed);
+            KappaClaus.toFront();
+        });
+    };
+    //~~~~~~~~~~~~Dynamic Kappa spawner~~~~~~~~~~~~~
+
+    var KappaSpawn = $interval(function () {
+        gameTime++;
+        //Kappa spawner
+        if(gameTime%200 === 0 ){
+            KappaSpawner();
+            KappaAnimater();
+        }
+        //speed increase
+        if(gameTime%3000 === 0){
+            speed = speed / 2;
+            KappaSpawner();
+        }
+        //level 2 spawning
+        if(gameTime>3000 && gameTime%100 === 0){
+            KappaSpawner();
+            KappaAnimater();
+        }
+        //level 3 spawning
+        if(gameTime>6000 && gameTime%50 === 0){
+            KappaSpawner();
+            KappaAnimater();
+        }
+
+
+
+    },1);
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End game function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    var collide = $interval( function() {
+        angular.forEach(Kappas, function(value, key) {
+            if( collision(  Kappas[key].attr('x'),  Kappas[key].attr('y'),  KappaClaus.attr('x'), KappaClaus.attr('y') )) {
+                var gameEnd = function(){
+                    paper.clear();
+                    $interval.cancel(KappaSpawn);
+                    $interval.cancel(collide);
+                    Kappas.splice(0,Kappas.length);
+                    gamechecker = true;
+                    return gamechecker;
+                };
+                gameEnd();
+            }
+
+        })
+    },100 );
+
+
+// Boss Kappa
+    /*var aaa = $timeout(function(){ {
+            $interval.cancel(dynKappaSpawner);
+            $interval.cancel(scope.KappaSpawn);
+            var kappaRoss = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(), 100, 100);
+            var KappaSpawn1 = $interval(function () {
+                var kappaRossMinions = [];
+                var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', kappaRoss.attr('x'), kappaRoss.attr('y'), 50, 50);
+                kappaRossMinions.push(Kappa);
+                angular.forEach(kappaRossMinions, function (value, key) {
+                    kappaRossMinions[key].stop();
+                    kappaRossMinions[key].animate({x: random(), y: random()}, 1000);
+                    var bbb = $timeout(function(){
+                        kappaRossMinions[key].delete();
+                    },4000);
+                })
+
+            }, 200);
+        }},9000)*/
+};
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Game starter~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        $interval(function(){
+if(gamechecker===true){
+    GameBegin();
+}},100);
+
+
+
+        GameBegin();
+
+
+
+
+
+
+
+      /*  var c = element[0].getContext('2d');
         var img = new Image();
         img.src = 'http://i.imgur.com/W0QgS4N.png';
 
@@ -14,10 +160,6 @@ angular.module('myApp').directive('biscuitcanvasDrv', function ($interval) {
             resolutions.push(Math.random()*200);
         };
 
-       /* attr.$observe('d', function () {
-            pusher();
-            c.drawImage(img,(Math.random()*500),(Math.random()*800),resolutions[0],resolutions[0])
-        });*/
         var kappaArray =[];
         function Kappa(x,y,h,w){
             this.x = x;
@@ -44,17 +186,14 @@ var kappaRedraw = function(){
                 , 100, 80);
 
         })
-};
-
-
+};*/
     }
-
 
     return {
         restrict: 'E',
         replace: true,
         scope: true,
         link: link,
-        template: '<canvas id="testCanvas" width="800" height="500" style="border: 1px solid #E0E0E0;"></canvas>'
+        template: '<div id="testCanvas" style="border: 1px solid #E0E0E0;"></div>'
     }
-});
+}]);
