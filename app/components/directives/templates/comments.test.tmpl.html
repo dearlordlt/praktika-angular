@@ -1,0 +1,42 @@
+<button ng-click="getALLComments()">wow</button>
+
+<!--Posting a comment-->
+<label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Leave a comment</label>
+
+<div uib-collapse="isCollapsed">
+    <div class="well well-lg">
+
+        <div>
+            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="comment.message" placeholder="your comment"> </textarea>
+        </div>
+        <button ng-click="createComment()">Post comment</button>
+        <div>{{postCommentRes}}</div>
+
+    </div>
+</div>
+
+<ul>
+    <li ng-repeat="comments in commentArray">
+        <ul>
+
+        <li>username : {{comments.username}}</li>
+        <li>message : {{comments.message}}</li>
+        <li>replies : {{comments.reply}}</li>
+            <li>id: {{comments._id}}</li>
+            <li>
+                <label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Reply</label>
+
+                <div uib-collapse="isCollapsed">
+                    <div class="well well-lg">
+                        <div>
+                            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="comment.message" placeholder="your comment"> </textarea>
+                        </div>
+                        <button ng-click="createComment(comments._id)">Reply</button>
+                    </div>
+                </div>
+                </li>
+            <li>parentId: {{comments.parentId}}</li>
+        </ul>
+    </li>
+</ul>
+<div>{{gotComment}}</div>

@@ -10,7 +10,7 @@ angular.module('myApp.BiscuitClicker', []).controller('BiscuitClickerCtrl', ['$s
         $scope.adder500Amount = 0;
 
         var add = null;
-
+        $scope.biscuitID = 123;
 
         $scope.biscuitClick = function(){
             $scope.biscuitAmount = $scope.biscuitAmount + 1;
