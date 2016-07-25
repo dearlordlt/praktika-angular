@@ -1,70 +1,46 @@
-<button ng-click="getALLComments()">wow</button>
+<button ng-click="getALLComments()">Get all comments</button>
 
 <!--Posting a comment-->
-<label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Leave a comment</label>
-
-<div uib-collapse="isCollapsed">
+<label class="btn btn-primary" ng-click="isCollapsedCreate = !isCollapsedCreate" ng-model="checkModel.left" uib-btn-checkbox>Leave a comment</label>
+<div uib-collapse="isCollapsedCreate">
     <div class="well well-lg">
-
         <div>
-            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="comment.message" placeholder="your comment"> </textarea>
+            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
         </div>
-        <button ng-click="createComment()">Post comment</button>
+        <button ng-click="createComment(data._id,data.comment)">Post comment</button>
         <div>{{postCommentRes}}</div>
 
     </div>
 </div>
 
-<!--<ul>
-    <li ng-repeat="comments in commentArray">
-        <ul>
-            <li>username : {{comments.username}}</li>
-            <li>message : {{comments.message}}</li>
-            <li>parentId: {{comments.parentId}}</li>
-            <li>likes: {{comments.likes}}</li>
-            <li>dislike: {{comments.dislikes}}</li>
-            <li>replies : {{comments.reply}}</li>
-            <li>id: {{comments._id}}</li>
-            <li>
-                <label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Reply</label>
-                <div uib-collapse="isCollapsed">
-                    <div class="well well-lg">
-                        <div>
-                            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="comment.message" placeholder="your comment"> </textarea>
-                        </div>
-                        <button ng-click="createComment(comments._id)">Reply</button>
-                    </div>
-                </div>
-                </li>
 
-        </ul>
-    </li>
-</ul>-->
-
+<!--getting all comments-->
 <script type="text/ng-template"  id="tree_item_renderer.html">
-    Comment:
+
     <ul>
+        <div>
+            <label class="btn btn-primary" ng-click="data.isCollapsed= !data.isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Reply</label>
+            <div uib-collapse="!data.isCollapsed">
+                <div class="well well-lg">
+                    <div>
+                        <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
+                    </div>
+                    <button ng-click="createComment(data._id, data.comment)">Reply</button>
+                </div>
+            </div>
+        </div>
         <li>id: {{data._id}}</li>
         <li>username : {{data.username}}</li>
         <li>message : {{data.message}}</li>
         <li>parentId: {{data.parentId}}</li>
         <li>likes: {{data.likes}}</li>
-        <li>dislike: {{data.dislikes}}</li>
-          <li ng-repeat="data in data.reply" ng-include="'tree_item_renderer.html'"></li>
-        <li>
-            <label class="btn btn-primary" ng-click="isCollapsed = !isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Reply</label>
-            <div uib-collapse="isCollapsed">
-                <div class="well well-lg">
-                    <div>
-                        <input style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </input>
-                    </div>
-                    <button ng-click="createComment(data._id, data.comment)">Reply</button>
-                </div>
-            </div>
-        </li>
+        <li>dislikes: {{data.dislikes}}</li>
+        <li ng-repeat="data in data.reply track by $index" ng-include="'tree_item_renderer.html'"></li>
     </ul>
 
+
 </script>
-<ul ng-show="getALLComments()">
-    <li ng-repeat="data in commentArray" ng-include="'tree_item_renderer.html'"></li>
+<ul>
+    <li ng-repeat="data in commentArray"  ng-include="'tree_item_renderer.html'"></li>
 </ul>
+

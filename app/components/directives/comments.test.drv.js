@@ -61,7 +61,6 @@ angular.module('myApp').directive('commentstestDrv', function ($cookies) {
                     method: 'GET',
                     url: 'http://localhost:9001/api/comments/?token='+$cookies.get('cool_token')
                 }).success(function(response) {
-                    $scope.allComments=response;
                     $scope.commentArray =[];
                     $scope.commentArray2 =[];
                     for( var i= 0; i < response.length; i++) {
@@ -91,6 +90,7 @@ angular.module('myApp').directive('commentstestDrv', function ($cookies) {
 
                 }).success(function(response) {
                     $scope.postCommentRes=response;
+                    $scope.getALLComments();
                     console.log(response);
                 })
 
@@ -102,6 +102,16 @@ angular.module('myApp').directive('commentstestDrv', function ($cookies) {
                     url: 'http://localhost:9001/api/comments/:'+ $scope.topicId +'/?token='+$cookies.get('cool_token')
                 }).success(function(response) {
                     $scope.topicComment=response;
+                    $scope.commentArray =[];
+                    $scope.commentArray2 =[];
+                    for( var i= 0; i < response.length; i++) {
+
+                        $scope.commentArray.push(new GotComment(response[i]._id, response[i].userid,response[i].username,response[i].message,response[i].likes,response[i].dislikes,response[i].parentId, response[i].topicId, response[i].isDeleted));
+                        $scope.commentArray2.push( new GotComment(response[i]._id, response[i].userid,response[i].username,response[i].message,response[i].likes,response[i].dislikes,response[i].parentId, response[i].topicId, response[i].isDeleted));
+
+                    }
+                    $scope.commentPusher($scope.commentArray, $scope.commentArray2 ); //pushes replies to reply property in commentArray
+                    $scope.arrayFixer($scope.commentArray); //deletes(splices) comments which are replies (have a parentId) from commentAr
                     console.log(response);
                 })
 
@@ -110,7 +120,7 @@ angular.module('myApp').directive('commentstestDrv', function ($cookies) {
 
             //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬UI¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
             $scope.isCollapsed = true;
-
+            $scope.isCollapsedCreate = true;
 
         }
 
