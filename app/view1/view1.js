@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp.view1', []).controller('View1Ctrl', ['$scope', '$rootScope', 'myService', '$http', '$uibModal', '$cookies',
-    function ($scope, $rootScope, myService, $http, $uibModal, $cookies) {
+angular.module('myApp.view1', []).controller('View1Ctrl', ['$scope', '$rootScope', 'myService', '$http', '$uibModal', '$cookies', '$sce',
+    function ($scope, $rootScope, myService, $http, $uibModal, $cookies, $sce) {
 
         $scope.dataFromCtrl3 = $rootScope.data;
 
@@ -11,6 +11,7 @@ angular.module('myApp.view1', []).controller('View1Ctrl', ['$scope', '$rootScope
             $scope.userList = response;
         });
 
+        $scope.htmlString = $sce.trustAsHtml('<a href="http://google.lt">ASD</a>');
 
         $scope.showInfo = function (index) {
             $scope.items = $scope.userList.users[index];
