@@ -5,14 +5,16 @@
 <div uib-collapse="isCollapsedCreate">
     <div class="well well-lg">
         <div>
-            <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
+            <textarea kappacomment-drv style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
         </div>
         <button ng-click="createComment(data._id,data.comment)">Post comment</button>
         <div>{{postCommentRes}}</div>
 
     </div>
 </div>
+<div id="editable" contenteditable style="width: 300px;height: 500px;border: 1px solid black">
 
+</div>
 
 <!--getting all comments-->
 <script type="text/ng-template"  id="tree_item_renderer.html">
@@ -23,7 +25,7 @@
             <div uib-collapse="!data.isCollapsed">
                 <div class="well well-lg">
                     <div>
-                        <textarea style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
+                        <textarea kappacomment-drv style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
                     </div>
                     <button ng-click="createComment(data._id, data.comment)">Reply</button>
                 </div>
@@ -31,7 +33,7 @@
         </div>
         <li>id: {{data._id}}</li>
         <li>username : {{data.username}}</li>
-        <li>message : {{data.message}}</li>
+        <li>message : <span ng-bind-html='toTrustedHTML(data.message)'></span></li>
         <li>parentId: {{data.parentId}}</li>
         <li>likes: {{data.likes}}</li>
         <li>dislikes: {{data.dislikes}}</li>

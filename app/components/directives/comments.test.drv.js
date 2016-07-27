@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('myApp').directive('commentstestDrv', function ($cookies) {
+angular.module('myApp').directive('commentstestDrv', function ($cookies, $sce) {
     return {
         templateUrl: 'components/directives/templates/comments.test.tmpl.html',
         scope: {
@@ -116,6 +116,9 @@ angular.module('myApp').directive('commentstestDrv', function ($cookies) {
                 })
 
 
+            };
+            $scope.toTrustedHTML = function( html ){
+                return $sce.trustAsHtml( html );
             };
 
             //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬UI¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
