@@ -9,6 +9,7 @@ angular.module('myApp').directive('biscuitcanvasDrv', ['$timeout','$interval', f
         var gamechecker = false;
 
 var GameBegin = function(){
+    KappaRoss.remove();
     gamechecker=false;
     //¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Initial variables¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
     var KappaClaus = paper.image('https://d1b2zzpxewkr9z.cloudfront.net/user_images/8445445cfca1fda805669ae04feb9c82a9f8809b/687474703a2f2f7477697463682e7770656e67696e652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f31312f537469636b65725f53616e74614b617070612e706e67', 10, 10, 55,65);
@@ -49,7 +50,7 @@ var GameBegin = function(){
         }
         else return false;
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Levels~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Kappa functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~~~~~~~~Kappa spawn variables~~~~~~~~~~~
     var speed = 6000;
     var gameTime = 0;
@@ -57,6 +58,7 @@ var GameBegin = function(){
     var KappaSpawner = function(){
         var Kappa = paper.image('http://i.imgur.com/W0QgS4N.png', random(), random(),  50, 50);
         Kappas.push(Kappa);
+        KappaAnimater();
     };
     var KappaAnimater = function(){
         angular.forEach(Kappas, function(value, key) {
@@ -65,29 +67,59 @@ var GameBegin = function(){
             KappaClaus.toFront();
         });
     };
+    var KappaCollisionChecker = function(){
+        angular.forEach(Kappas, function(value, key) {
+            if( collision(  Kappas[key].attr('x'),  Kappas[key].attr('y'),  KappaClaus.attr('x'), KappaClaus.attr('y') )) {
+                var gameEnd = function(){
+                    paper.clear();
+                    $interval.cancel(KappaSpawn);
+                    Kappas.splice(0,Kappas.length);
+                    gamechecker = true;
+                    return gamechecker;
+                };
+                gameEnd();
+            }
+        })
+    };
+    var KappaRemover  = function(){
+        KappaAnimater();
+        angular.forEach(Kappas, function(value, key) {
+            if(key<1){
+                Kappas[key].remove();
+                Kappas.splice(0,1);
+                KappaClaus.toFront();
+            }
+        });
+    };
     //~~~~~~~~~~~~Dynamic Kappa spawner~~~~~~~~~~~~~
+
 
     var KappaSpawn = $interval(function () {
         gameTime++;
         //Kappa spawner
-        if(gameTime%200 === 0 ){
-            KappaSpawner();
+        /*if(gameTime%80 === 0 ){
             KappaAnimater();
+        }*/
+        if(gameTime<3000 && gameTime%200 === 0 ){
+            KappaSpawner();
         }
         //speed increase
-        if(gameTime%3000 === 0){
+        if(gameTime%2000  === 0){
             speed = speed / 2;
-            KappaSpawner();
         }
         //level 2 spawning
-        if(gameTime>3000 && gameTime%100 === 0){
+        if(gameTime > 2000 && gameTime < 4000 && gameTime%100 === 0){
             KappaSpawner();
-            KappaAnimater();
         }
         //level 3 spawning
-        if(gameTime>6000 && gameTime%50 === 0){
+        if(gameTime>4000 && gameTime%50 === 0){
             KappaSpawner();
-            KappaAnimater();
+        }
+        if(gameTime>1){
+            KappaCollisionChecker();
+        }
+        if(gameTime>5000 && gameTime%250 === 0){
+            KappaRemover();
         }
 
 
@@ -95,7 +127,7 @@ var GameBegin = function(){
     },1);
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End game function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    var collide = $interval( function() {
+   /* var collide = $interval( function() {
         angular.forEach(Kappas, function(value, key) {
             if( collision(  Kappas[key].attr('x'),  Kappas[key].attr('y'),  KappaClaus.attr('x'), KappaClaus.attr('y') )) {
                 var gameEnd = function(){
@@ -111,7 +143,7 @@ var GameBegin = function(){
 
         })
     },100 );
-
+*/
 
 // Boss Kappa
     /*var aaa = $timeout(function(){ {
@@ -140,53 +172,8 @@ if(gamechecker===true){
     GameBegin();
 }},100);
 
-
-
-        GameBegin();
-
-
-
-
-
-
-
-      /*  var c = element[0].getContext('2d');
-        var img = new Image();
-        img.src = 'http://i.imgur.com/W0QgS4N.png';
-
-        var resolutions =[];
-        var pusher = function(){
-            resolutions.splice(0);
-            resolutions.push(Math.random()*200);
-        };
-
-        var kappaArray =[];
-        function Kappa(x,y,h,w){
-            this.x = x;
-            this.y = y;
-            this.h = h;
-            this.w = w;
-        }
-
-        attr.$observe('kappa', function () {
-            pusher();
-            var kappa = new Kappa(Math.random()*800,Math.random()*500,resolutions[0],resolutions[0]);
-            c.drawImage(img,kappa.x, kappa.y, kappa.h, kappa.w);
-            kappaArray.push(kappa);
-            kappaRedraw();
-        });
-
-var kappaRedraw = function(){
-        angular.forEach(kappaArray, function(value, key){
-             $interval(function () {
-                    kappaArray[key].x = kappaArray[key].x + (Math.random()*5) - 2.5;
-                    kappaArray[key].y = kappaArray[key].y + (Math.random()*5) - 2.5;
-                    c.drawImage(img,kappaArray[key].x, kappaArray[key].y, kappaArray[key].h, kappaArray[key].w);
-                }
-                , 100, 80);
-
-        })
-};*/
+       var KappaRoss = paper.image('http://i1.kym-cdn.com/photos/images/facebook/001/037/049/75d.png',150,150,150,150);
+        KappaRoss.click(GameBegin);
     }
 
     return {

@@ -2,7 +2,7 @@ angular.module('myApp.CoolLoginPage', ['ngRoute']).controller('CoolLoginPageCtrl
     $scope.user = {
 
     };
-    $scope.addTokenToCookie = function(token) {
+    $scope.addUserToCookie = function(token,username,userID) {
         var expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 1);
 
@@ -10,8 +10,16 @@ angular.module('myApp.CoolLoginPage', ['ngRoute']).controller('CoolLoginPageCtrl
             $cookies.put('cool_token', token, {
                 expires: expireDate
             });
+            $cookies.put('such_username', username, {
+                expires: expireDate
+            });
+            $cookies.put('such_userID', userID, {
+                expires: expireDate
+            });
+
         }
     };
+
 
     $scope.Authenticate = function(){
         $http({
@@ -24,13 +32,14 @@ angular.module('myApp.CoolLoginPage', ['ngRoute']).controller('CoolLoginPageCtrl
         }).success(function(response) {
             $scope.authentication=response;
             $scope.token=response.token;
-            $scope.addTokenToCookie(response.token);
+            $scope.addUserToCookie(response.token,response.username, response.userID);
             if(response.token) {
                 $location.path("/DatabaseTestThing");
             }
 
         })
     };
+
 
 
 

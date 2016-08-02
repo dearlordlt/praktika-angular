@@ -1,0 +1,48 @@
+<button ng-click="getALLComments()">Get all comments</button>
+
+<!--Posting a comment-->
+<label class="btn btn-primary" ng-click="isCollapsedCreate = !isCollapsedCreate" ng-model="checkModel.left" uib-btn-checkbox>Leave a comment</label>
+<div uib-collapse="isCollapsedCreate">
+    <div class="well well-lg">
+        <div>
+            <textarea kappacomment-drv style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
+        </div>
+        <button ng-click="createComment(data._id,data.comment)">Post comment</button>
+        <div>{{postCommentRes}}</div>
+
+    </div>
+</div>
+<!--<div id="editable" contenteditable style="width: 300px;height: 500px;border: 1px solid black">
+
+</div>-->
+
+<!--getting all comments-->
+<script type="text/ng-template"  id="tree_item_renderer.html">
+
+    <ul>
+        <div>
+            <label class="btn btn-primary" ng-click="data.isCollapsed= !data.isCollapsed" ng-model="checkModel.left" uib-btn-checkbox>Reply</label>
+            <div uib-collapse="!data.isCollapsed">
+                <div class="well well-lg">
+                    <div>
+                        <textarea kappacomment-drv style="height:150px;width:500px;"  type="text" class="form-control" ng-model="data.comment" placeholder="your comment"> </textarea>
+                    </div>
+                    <button ng-click="createComment(data._id, data.comment)">Reply</button>
+                </div>
+            </div>
+        </div>
+        <li>id: {{data._id}}</li>
+        <li>username : {{data.username}}</li>
+        <li>message : <span ng-bind-html='toTrustedHTML(data.message)'></span></li>
+        <li>parentId: {{data.parentId}}</li>
+        <li>likes: {{data.likes}}</li>
+        <li>dislikes: {{data.dislikes}}</li>
+        <li ng-repeat="data in data.reply track by $index" ng-include="'tree_item_renderer.html'"></li>
+    </ul>
+
+
+</script>
+<ul>
+    <li ng-repeat="data in commentArray"  ng-include="'tree_item_renderer.html'"></li>
+</ul>
+
